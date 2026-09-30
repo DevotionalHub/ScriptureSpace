@@ -26,13 +26,13 @@
 
     <link
       rel="icon"
-      type="image/svg+xml"
-      href="/scripture-space-favicon.svg"
+      type="image/png"
+      href="https://res.cloudinary.com/nylncw2s/image/upload/v1790694022/ChatGPT_Image_Sep_29_2026_04_00_00_PM.png"
     />
 
     <link
       rel="apple-touch-icon"
-      href="/scripture-space-favicon.svg"
+      href="https://res.cloudinary.com/nylncw2s/image/upload/v1790694022/ChatGPT_Image_Sep_29_2026_04_00_00_PM.png"
     />
 
     <title>Scripture Space · Find stillness in the Word</title>
@@ -84,7 +84,18 @@
         font-size: 12px;
       }
 
+      .first-paint-nav a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .first-paint-nav a:hover {
+        color: #496b52;
+      }
+
       .first-paint-button {
+        display: inline-flex;
+        align-items: center;
         border: 0;
         border-radius: 7px;
         padding: 10px 16px;
@@ -92,7 +103,12 @@
         background: #496b52;
         font-size: 11px;
         font-weight: 600;
+        text-decoration: none;
         cursor: pointer;
+      }
+
+      .first-paint-button:hover {
+        background: #365b3f;
       }
 
       .first-paint-hero {
@@ -150,6 +166,11 @@
         color: #496b52;
         font-size: 11px;
         font-weight: 600;
+        text-decoration: none;
+      }
+
+      .first-paint-link:hover {
+        text-decoration: underline;
       }
 
       .first-paint-card {
@@ -287,20 +308,20 @@
         <header class="first-paint-header">
           <div class="first-paint-brand">
             <img
-              src="/scripture-space-logo.svg"
+              src="https://res.cloudinary.com/nylncw2s/image/upload/v1790694022/ChatGPT_Image_Sep_29_2026_04_00_00_PM.png"
               alt="Scripture Space"
             />
           </div>
 
           <nav class="first-paint-nav" aria-label="Bible app sections">
-            <span>Read Bible</span>
-            <span>Verse Library</span>
-            <span>Communities</span>
+            <a href="#read-bible">Read Bible</a>
+            <a href="#verse-library">Verse Library</a>
+            <a href="#communities">Communities</a>
           </nav>
 
-          <button class="first-paint-button">
+          <a class="first-paint-button" href="#sign-in">
             Sign in
-          </button>
+          </a>
         </header>
 
         <section class="first-paint-hero">
@@ -320,13 +341,13 @@
             </p>
 
             <div class="first-paint-actions">
-              <button class="first-paint-button">
+              <a class="first-paint-button" href="#read-bible">
                 Open today’s reading →
-              </button>
+              </a>
 
-              <span class="first-paint-link">
+              <a class="first-paint-link" href="#verse-library">
                 Explore the Bible
-              </span>
+              </a>
             </div>
           </div>
 
@@ -348,7 +369,7 @@
         </section>
 
         <section class="first-paint-grid">
-          <article class="first-paint-tile">
+          <article class="first-paint-tile" id="verse-library">
             <span>✧</span>
             <strong>Enlightenment verses</strong>
             <p>
@@ -357,7 +378,7 @@
             </p>
           </article>
 
-          <article class="first-paint-tile">
+          <article class="first-paint-tile" id="read-bible">
             <span>⌁</span>
             <strong>Private reflections</strong>
             <p>
@@ -366,7 +387,7 @@
             </p>
           </article>
 
-          <article class="first-paint-tile">
+          <article class="first-paint-tile" id="communities">
             <span>◌</span>
             <strong>Study in community</strong>
             <p>
