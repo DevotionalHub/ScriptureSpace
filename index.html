@@ -14,15 +14,12 @@
     />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Scripture Space" />
-    <meta
-      property="og:title"
-      content="Scripture Space · Find stillness in the Word"
-    />
+    <meta property="og:title" content="Scripture Space · Find stillness in the Word" />
     <meta
       property="og:description"
       content="Read scripture, save meaningful verses, reflect privately, and study with a thoughtful community."
     />
+    <meta property="og:site_name" content="Scripture Space" />
 
     <link
       rel="icon"
@@ -62,12 +59,12 @@
       }
 
       .first-paint-header {
-        max-width: 1160px;
-        margin: 0 auto 70px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 20px;
+        max-width: 1160px;
+        margin: 0 auto 70px;
       }
 
       .first-paint-brand img {
@@ -112,12 +109,12 @@
       }
 
       .first-paint-hero {
-        max-width: 1160px;
-        margin: 0 auto;
         display: grid;
         grid-template-columns: 1.05fr 0.95fr;
         gap: 34px;
         align-items: stretch;
+        max-width: 1160px;
+        margin: 0 auto;
       }
 
       .first-paint-copy {
@@ -230,11 +227,11 @@
       }
 
       .first-paint-grid {
-        max-width: 1160px;
-        margin: 32px auto 0;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+        max-width: 1160px;
+        margin: 32px auto 0;
       }
 
       .first-paint-tile {
@@ -314,17 +311,17 @@
           </div>
 
           <nav class="first-paint-nav" aria-label="Bible app sections">
-            <a href="#read-bible">Read Bible</a>
-            <a href="#verse-library">Verse Library</a>
-            <a href="#communities">Communities</a>
+            <a href="/#/read">Read Bible</a>
+            <a href="/#/library">Verse library</a>
+            <a href="/#/communities">Communities</a>
           </nav>
 
-          <a class="first-paint-button" href="#sign-in">
+          <a class="first-paint-button" href="/#/home">
             Sign in
           </a>
         </header>
 
-        <section class="first-paint-hero">
+        <section class="first-paint-hero" aria-label="Scripture Space welcome">
           <div class="first-paint-copy">
             <div class="first-paint-kicker">
               A quieter place for the Word
@@ -341,11 +338,11 @@
             </p>
 
             <div class="first-paint-actions">
-              <a class="first-paint-button" href="#read-bible">
+              <a class="first-paint-button" href="/#/read">
                 Open today’s reading →
               </a>
 
-              <a class="first-paint-link" href="#verse-library">
+              <a class="first-paint-link" href="/#/library">
                 Explore the Bible
               </a>
             </div>
@@ -368,8 +365,8 @@
           </article>
         </section>
 
-        <section class="first-paint-grid">
-          <article class="first-paint-tile" id="verse-library">
+        <section class="first-paint-grid" aria-label="Scripture Space features">
+          <article class="first-paint-tile">
             <span>✧</span>
             <strong>Enlightenment verses</strong>
             <p>
@@ -378,7 +375,7 @@
             </p>
           </article>
 
-          <article class="first-paint-tile" id="read-bible">
+          <article class="first-paint-tile">
             <span>⌁</span>
             <strong>Private reflections</strong>
             <p>
@@ -387,7 +384,7 @@
             </p>
           </article>
 
-          <article class="first-paint-tile" id="communities">
+          <article class="first-paint-tile">
             <span>◌</span>
             <strong>Study in community</strong>
             <p>
