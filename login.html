@@ -67,6 +67,7 @@
       }
 
       .login-art {
+        order: 2;
         position: relative;
         overflow: hidden;
         min-height: 700px;
@@ -192,6 +193,7 @@
       }
 
       .login-panel {
+        order: 1;
         display: grid;
         place-items: center;
         padding: 32px;
@@ -358,6 +360,11 @@
           display: block;
         }
 
+        .login-art,
+        .login-panel {
+          order: initial;
+        }
+
         .login-art {
           min-height: 330px;
           padding: 25px;
@@ -424,7 +431,7 @@
         >
           <img
             src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
-            alt=""
+            alt="Scripture Space logo"
           />
           <span>Scripture<span>Space</span></span>
         </a>
@@ -464,7 +471,7 @@
 
       <section class="login-panel">
         <div class="login-card">
-          <a class="back-link" href="index.html">
+          <a class="back-link" href="/">
             ← Back to Scripture Space
           </a>
 
@@ -480,6 +487,7 @@
           <form id="auth-form">
             <label class="field-label" for="email">
               Email address
+
               <input
                 id="email"
                 type="email"
@@ -495,6 +503,11 @@
 
             <p id="auth-status" class="status" role="status"></p>
           </form>
+
+          <div class="security-note">
+            <span>⌁</span>
+            Passwordless and secure through Supabase
+          </div>
 
           <p class="auth-footer">
             New to Scripture Space?
