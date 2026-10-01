@@ -426,6 +426,7 @@
             src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
             alt="Scripture Space logo"
           />
+
           <span>Scripture<span>Space</span></span>
         </a>
 
@@ -464,7 +465,7 @@
 
       <section class="signup-panel">
         <div class="signup-card">
-          <a class="back-link" href="index.html">
+          <a class="back-link" href="/">
             ← Back to Scripture Space
           </a>
 
@@ -477,12 +478,17 @@
             No password to remember.
           </p>
 
-          <form id="auth-form">
+          <form
+            id="auth-form"
+            action="/verification.html"
+            method="get"
+          >
             <label class="field-label" for="email">
               Email address
 
               <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="you@example.com"
                 autocomplete="email"
@@ -496,6 +502,11 @@
 
             <p id="auth-status" class="status" role="status"></p>
           </form>
+
+          <div class="security-note">
+            <span>⌁</span>
+            Passwordless and secure through Supabase
+          </div>
 
           <p class="auth-footer">
             Already have an account?
