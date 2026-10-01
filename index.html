@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#101112" />
+    <meta name="theme-color" content="#172554" />
     <meta name="color-scheme" content="dark" />
     <meta name="application-name" content="Scripture Space" />
 
@@ -39,13 +39,13 @@
 
     <style>
       :root {
-        --night: #101112;
-        --cream: #f5f1e9;
-        --muted: #b7b1a9;
-        --line: rgba(255, 255, 255, 0.16);
-        --coral: #f06b6f;
-        --coral-light: #ff9590;
+        --navy: #172554;
         --gold: #d4a72c;
+        --off-white: #fafaf7;
+        --soft-gray: #e5e7eb;
+        --charcoal: #1f2937;
+        --muted: #6b7280;
+        --gold-light: #f2ce67;
       }
 
       * {
@@ -58,8 +58,8 @@
 
       body {
         margin: 0;
-        background: var(--night);
-        color: var(--cream);
+        background: var(--navy);
+        color: var(--off-white);
         font-family:
           Inter,
           ui-sans-serif,
@@ -75,15 +75,11 @@
         text-decoration: none;
       }
 
-      button {
-        font: inherit;
-        cursor: pointer;
-      }
-
       .hero-page {
+        position: relative;
         min-height: 100vh;
         overflow: hidden;
-        background: var(--night);
+        background: var(--navy);
       }
 
       .hero-page::before {
@@ -94,31 +90,21 @@
         background:
           radial-gradient(
             circle at 86% 46%,
-            rgba(228, 105, 64, 0.44),
+            rgba(212, 167, 44, 0.28),
             transparent 29%
           ),
           radial-gradient(
             circle at 66% 42%,
-            rgba(116, 33, 27, 0.18),
+            rgba(23, 37, 84, 0.25),
             transparent 36%
           ),
           linear-gradient(
             90deg,
-            rgba(16, 17, 18, 0.96) 0%,
-            rgba(16, 17, 18, 0.92) 37%,
-            rgba(16, 17, 18, 0.48) 67%,
-            rgba(16, 17, 18, 0.08) 100%
+            rgba(23, 37, 84, 0.98) 0%,
+            rgba(23, 37, 84, 0.94) 37%,
+            rgba(23, 37, 84, 0.6) 67%,
+            rgba(23, 37, 84, 0.15) 100%
           );
-      }
-
-      .hero-page::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.17;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
-        mix-blend-mode: soft-light;
       }
 
       .hero-inner {
@@ -126,7 +112,7 @@
         z-index: 1;
         width: min(1370px, calc(100% - 80px));
         min-height: 100vh;
-        margin: auto;
+        margin: 0 auto;
       }
 
       .site-header {
@@ -141,6 +127,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        color: var(--off-white);
         font-size: 19px;
         font-weight: 700;
         letter-spacing: -0.7px;
@@ -164,7 +151,7 @@
         gap: clamp(22px, 3.5vw, 53px);
         margin-left: auto;
         margin-right: 55px;
-        color: #dedbd6;
+        color: #e5e7eb;
         font-size: 13px;
       }
 
@@ -173,19 +160,40 @@
       }
 
       .site-nav a:hover {
-        color: var(--coral-light);
+        color: var(--gold-light);
       }
 
-      .language {
+      .auth-actions {
         display: flex;
         align-items: center;
-        gap: 8px;
-        color: #e1ded9;
+        gap: 16px;
+      }
+
+      .login-link {
+        color: var(--off-white);
         font-size: 12px;
       }
 
-      .language span {
-        color: #8f8c88;
+      .login-link:hover {
+        color: var(--gold-light);
+      }
+
+      .signup-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+        color: var(--off-white);
+        font-size: 12px;
+        transition: 0.2s ease;
+      }
+
+      .signup-link:hover {
+        border-color: var(--gold);
+        color: var(--gold-light);
+        transform: translateY(-1px);
       }
 
       .hero-content {
@@ -205,10 +213,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        color: var(--coral-light);
+        color: var(--gold-light);
         font-size: 12px;
         font-weight: 600;
-        letter-spacing: 0.3px;
       }
 
       .eyebrow-mark {
@@ -217,15 +224,14 @@
         display: grid;
         place-items: center;
         border-radius: 8px;
-        background: #ef5e64;
-        color: white;
-        font-size: 12px;
+        color: var(--navy);
+        background: var(--gold);
       }
 
       h1 {
         max-width: 670px;
         margin: 28px 0 23px;
-        color: #f7f3ee;
+        color: var(--off-white);
         font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(51px, 6vw, 88px);
         font-weight: 400;
@@ -234,13 +240,14 @@
       }
 
       h1 em {
+        color: var(--gold-light);
         font-weight: 400;
       }
 
       .hero-description {
         max-width: 600px;
         margin: 0;
-        color: #c7c1b9;
+        color: #d1d5db;
         font-size: 15px;
         line-height: 1.52;
       }
@@ -262,30 +269,28 @@
         padding: 13px 20px;
         font-size: 13px;
         font-weight: 600;
-        transition:
-          transform 0.2s ease,
-          background 0.2s ease;
+        transition: 0.2s ease;
       }
 
       .primary-cta {
-        color: #fff;
-        background: var(--coral);
-        box-shadow: 0 10px 28px rgba(240, 107, 111, 0.22);
+        color: var(--navy);
+        background: var(--gold);
+        box-shadow: 0 10px 28px rgba(212, 167, 44, 0.24);
       }
 
       .primary-cta:hover {
-        background: #f88380;
+        background: #e7be4b;
         transform: translateY(-2px);
       }
 
       .secondary-cta {
         border: 1px solid rgba(255, 255, 255, 0.35);
-        color: #f3efea;
+        color: var(--off-white);
       }
 
       .secondary-cta:hover {
-        border-color: var(--coral-light);
-        color: var(--coral-light);
+        border-color: var(--gold);
+        color: var(--gold-light);
         transform: translateY(-2px);
       }
 
@@ -295,9 +300,8 @@
         display: grid;
         place-items: center;
         border-radius: 50%;
-        color: var(--coral);
-        background: #fff;
-        font-size: 15px;
+        color: var(--gold);
+        background: var(--off-white);
       }
 
       .hero-note {
@@ -305,13 +309,12 @@
         align-items: center;
         gap: 9px;
         margin-top: 28px;
-        color: #8f8b84;
+        color: #9ca3af;
         font-size: 11px;
       }
 
       .hero-note strong {
-        color: #c7c0b7;
-        font-weight: 500;
+        color: #e5e7eb;
       }
 
       .hero-note-dot {
@@ -334,7 +337,7 @@
         width: 70%;
         height: 55%;
         border-radius: 50%;
-        background: rgba(241, 103, 57, 0.34);
+        background: rgba(212, 167, 44, 0.3);
         filter: blur(80px);
       }
 
@@ -345,9 +348,14 @@
         width: min(370px, 42vw);
         aspect-ratio: 0.49;
         padding: 9px;
-        border: 2px solid #796f70;
+        border: 2px solid #9ca3af;
         border-radius: 47px;
-        background: linear-gradient(135deg, #181a1d, #070708 54%, #79676a);
+        background: linear-gradient(
+          135deg,
+          #1f2937,
+          #070708 54%,
+          #6b7280
+        );
         box-shadow:
           -26px 34px 42px rgba(0, 0, 0, 0.55),
           0 0 0 4px rgba(255, 255, 255, 0.08);
@@ -375,9 +383,9 @@
         border-radius: 38px;
         background: linear-gradient(
           160deg,
-          #f8c59d 0 23%,
-          #e88d7e 35%,
-          #6f5365 61%,
+          #f5d998 0 23%,
+          #d4a72c 35%,
+          #4f5262 61%,
           #252638 100%
         );
       }
@@ -389,7 +397,7 @@
         width: 106px;
         height: 106px;
         border-radius: 50%;
-        background: rgba(255, 229, 183, 0.72);
+        background: rgba(250, 250, 247, 0.72);
         filter: blur(4px);
       }
 
@@ -416,7 +424,7 @@
         content: "";
         position: absolute;
         inset: 22% 0 0;
-        background: rgba(30, 33, 46, 0.65);
+        background: rgba(23, 37, 84, 0.72);
         clip-path: polygon(
           0 100%,
           36% 40%,
@@ -453,7 +461,7 @@
 
       .phone-tabs b {
         color: white;
-        border-bottom: 2px solid #ff7678;
+        border-bottom: 2px solid var(--gold);
         padding-bottom: 4px;
       }
 
@@ -467,12 +475,12 @@
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 13px;
         color: white;
-        background: rgba(18, 19, 28, 0.67);
+        background: rgba(23, 37, 84, 0.78);
         backdrop-filter: blur(12px);
       }
 
       .phone-card small {
-        color: #f4bbb2;
+        color: var(--gold-light);
         font-size: 7px;
         text-transform: uppercase;
         letter-spacing: 0.7px;
@@ -489,7 +497,7 @@
       .phone-card span {
         display: block;
         margin-top: 4px;
-        color: #d7d4d4;
+        color: #d1d5db;
         font-size: 7px;
       }
 
@@ -502,8 +510,8 @@
         padding: 11px 13px;
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 10px;
-        color: #f2eeea;
-        background: rgba(25, 24, 26, 0.68);
+        color: var(--off-white);
+        background: rgba(23, 37, 84, 0.82);
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.22);
         backdrop-filter: blur(12px);
         font-size: 10px;
@@ -517,7 +525,7 @@
       .floating-card small {
         display: block;
         margin-top: 4px;
-        color: #aaa5a1;
+        color: #d1d5db;
         font-size: 8px;
       }
 
@@ -527,8 +535,8 @@
         display: grid;
         place-items: center;
         border-radius: 8px;
-        color: var(--coral-light);
-        background: rgba(240, 107, 111, 0.18);
+        color: var(--navy);
+        background: var(--gold);
       }
 
       .float-top {
@@ -541,11 +549,6 @@
         bottom: 16%;
       }
 
-      .float-bottom .floating-icon {
-        color: var(--gold);
-        background: rgba(212, 167, 44, 0.15);
-      }
-
       .hero-footer {
         position: absolute;
         right: 7.2%;
@@ -554,7 +557,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: #88847e;
+        color: #9ca3af;
         font-size: 10px;
       }
 
@@ -567,7 +570,7 @@
       .footer-rule {
         width: 35px;
         height: 1px;
-        background: #615d59;
+        background: #9ca3af;
       }
 
       @media (max-width: 900px) {
@@ -616,10 +619,6 @@
           right: 0;
           left: 0;
         }
-
-        .hero-description {
-          font-size: 14px;
-        }
       }
 
       @media (max-width: 520px) {
@@ -636,21 +635,21 @@
           height: 32px;
         }
 
-        .language {
+        .auth-actions {
+          gap: 8px;
+        }
+
+        .login-link {
+          font-size: 10px;
+        }
+
+        .signup-link {
+          padding: 8px 10px;
           font-size: 10px;
         }
 
         .hero-content {
           padding-top: 32px;
-        }
-
-        .eyebrow {
-          font-size: 10px;
-        }
-
-        .eyebrow-mark {
-          width: 24px;
-          height: 24px;
         }
 
         .hero-actions {
@@ -694,7 +693,9 @@
 
         .hero-footer {
           position: relative;
+          right: auto;
           bottom: auto;
+          left: auto;
           margin-top: 12px;
         }
 
@@ -719,7 +720,11 @@
       <main class="hero-page">
         <div class="hero-inner">
           <header class="site-header">
-            <a class="site-brand" href="/#/home" aria-label="Scripture Space home">
+            <a
+              class="site-brand"
+              href="/#/home"
+              aria-label="Scripture Space home"
+            >
               <img
                 src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
                 alt=""
@@ -728,19 +733,24 @@
             </a>
 
             <nav class="site-nav" aria-label="Main navigation">
-              <a href="index.html">Home</a>
-              <a href="bible.html">Read Bible</a>
-              <a href="library.html">Verse library</a>
-              <a href="communities.html">Communities</a>
-              <a href="admin.html">Admin</a>
+              <a href="/#/home">Home</a>
+              <a href="/#/read">Read Bible</a>
+              <a href="/#/library">Verse library</a>
+              <a href="/#/communities">Communities</a>
             </nav>
 
-            <a class="language" href="/#/home" aria-label="Select language">
-              English <span>⌄</span>
-            </a>
+            <div class="auth-actions">
+              <a class="login-link" href="/?auth=login">
+                Log in
+              </a>
+
+              <a class="signup-link" href="/?auth=signup">
+                Sign up <span>→</span>
+              </a>
+            </div>
           </header>
 
-          <section class="hero-content" aria-label="Scripture Space introduction">
+          <section class="hero-content">
             <div class="hero-copy">
               <div class="eyebrow">
                 <span class="eyebrow-mark">✦</span>
@@ -754,8 +764,9 @@
               </h1>
 
               <p class="hero-description">
-                Create a quiet space to read scripture, save the verses that meet you,
-                write private reflections, and study alongside a thoughtful community.
+                Create a quiet space to read scripture, save the verses that
+                meet you, write private reflections, and study alongside a
+                thoughtful community.
               </p>
 
               <div class="hero-actions">
@@ -806,8 +817,12 @@
 
                   <div class="phone-card">
                     <small>Morning reflection</small>
-                    <strong>Be still, and know that I am God.</strong>
-                    <span>Psalm 46:10 · New International Version</span>
+                    <strong>
+                      Be still, and know that I am God.
+                    </strong>
+                    <span>
+                      Psalm 46:10 · New International Version
+                    </span>
                   </div>
                 </div>
               </div>
