@@ -521,6 +521,62 @@
       </section>
     </main>
 
-    <script type="module" src="/src/auth-entry.js"></script>
+    <script type="module">
+      import { supabase } from "/src/lib/supabase.js";
+
+      const form = document.querySelector("#auth-form");
+      const emailInput = document.querySelector("#email");
+      const status = document.querySelector("#auth-status");
+      const submitButton = document.querySelector("#auth-submit");
+
+      const verificationUrl = new URL(
+        "/verification.html",
+        window.location.origin
+      ).toString();
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim().toLowerCase();
+
+        if (!email) {
+          status.textContent = "Please enter your email address.";
+          status.className = "status error";
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending verification email…";
+        status.textContent = "";
+        status.className = "status";
+
+        try {
+          const { error } = await supabase.auth.signInWithOtp({
+            email,
+            options: {
+              emailRedirectTo: verificationUrl,
+            },
+          });
+
+          if (error) {
+            throw error;
+          }
+
+          window.location.replace(verificationUrl);
+        } catch (error) {
+          submitButton.disabled = false;
+          submitButton.innerHTML =
+            'Create my account <span>→</span>';
+
+          status.textContent =
+            error?.message ||
+            "We could not send the verification email. Please try again.";
+
+          status.className = "status error";
+
+          console.error("Supabase signup error:", error);
+        }
+      });
+    </script>
   </body>
 </html>
