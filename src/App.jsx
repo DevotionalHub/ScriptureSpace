@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   Archive,
+  ArrowLeft,
   ArrowRight,
   Bell,
   BookOpen,
@@ -23,6 +24,7 @@ import {
   LockKeyhole,
   LogIn,
   LogOut,
+  Mail,
   Menu,
   MessageCircle,
   MoreHorizontal,
@@ -41,6 +43,16 @@ import {
 } from 'lucide-react'
 import { ADMIN_EMAIL, supabase } from './lib/supabase'
 import './styles.css'
+
+const routedPages = ['home', 'read', 'library', 'communities', 'bookmarks', 'notes', 'admin', 'login', 'signup']
+
+function pageFromLocation() {
+  const hash = window.location.hash.replace(/^#\/?/, '').split('?')[0]
+  if (routedPages.includes(hash)) return hash
+  const authParam = new URLSearchParams(window.location.search).get('auth')
+  if (authParam === 'login' || authParam === 'signup') return authParam
+  return 'home'
+}
 
 const navSections = [
   {
@@ -138,7 +150,7 @@ const initialVisitors = [
 ]
 
 function App() {
-  const [activePage, setActivePage] = useState('home')
+  const [activePage, setActivePage] = useState(pageFromLocation)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [authLoading, setAuthLoading] = useState(true)
@@ -170,6 +182,20 @@ function App() {
       listener?.subscription?.unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    const syncFromLocation = () => setActivePage(pageFromLocation())
+    window.addEventListener('hashchange', syncFromLocation)
+    window.addEventListener('popstate', syncFromLocation)
+    return () => {
+      window.removeEventListener('hashchange', syncFromLocation)
+      window.removeEventListener('popstate', syncFromLocation)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (currentUser && (activePage === 'login' || activePage === 'signup')) navigate('home')
+  }, [currentUser, activePage])
 
   useEffect(() => {
     const visitorId = window.localStorage.getItem('scripture-space-visitor') || crypto.randomUUID()
@@ -226,6 +252,15 @@ function App() {
     setActivePage(page)
     setSidebarOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (page === 'login' || page === 'signup') {
+      if (!window.location.search.includes(`auth=${page}`)) window.history.pushState({}, '', `/?auth=${page}`)
+      return
+    }
+    if (window.location.search.includes('auth=')) {
+      window.history.pushState({}, '', `/#/${page}`)
+    } else if (window.location.hash !== `#/${page}`) {
+      window.location.hash = `/${page}`
+    }
   }
 
   const toggleSaved = (reference) => {
@@ -283,6 +318,8 @@ function App() {
     bookmarks: 'Saved verses',
     notes: 'My reflections',
     admin: 'Admin overview',
+    login: 'Welcome back',
+    signup: 'Create your account',
   }[activePage]
 
   return (
@@ -335,7 +372,7 @@ function App() {
               <button className="icon-button subtle" onClick={signOut} aria-label="Sign out"><LogOut size={15} /></button>
             </div>
           ) : (
-            <button className="profile-chip sign-in-chip" onClick={() => setAuthOpen(true)}>
+            <button className="profile-chip sign-in-chip" onClick={() => navigate('login')}>
               <div className="avatar guest-avatar"><UserRound size={16} /></div>
               <div className="profile-details"><strong>Sign in to save</strong><span>Keep your journey with you</span></div>
               <LogIn size={16} />
@@ -361,7 +398,7 @@ function App() {
               <kbd>⌘ K</kbd>
             </label>
             <button className="icon-button notification-button" aria-label="Notifications" onClick={() => showToast('You are all caught up.') }><Bell size={19} /><span /></button>
-            {!currentUser && <button className="top-signin" onClick={() => setAuthOpen(true)}>Sign in <ArrowRight size={15} /></button>}
+            {!currentUser && <button className="top-signin" onClick={() => navigate('login')}>Sign in <ArrowRight size={15} /></button>}
           </div>
         </header>
 
@@ -373,6 +410,8 @@ function App() {
           {activePage === 'bookmarks' && <BookmarksPage savedVerses={savedVerses} toggleSaved={toggleSaved} copyVerse={copyVerse} navigate={navigate} />}
           {activePage === 'notes' && <NotesPage showToast={showToast} />}
           {activePage === 'admin' && <AdminPage isAdmin={isAdmin} currentUser={currentUser} openAuth={() => setAuthOpen(true)} visitors={visitors} setVisitors={setVisitors} showToast={showToast} />}
+          {activePage === 'login' && <LoginPage navigate={navigate} showToast={showToast} />}
+          {activePage === 'signup' && <SignupPage navigate={navigate} showToast={showToast} />}
         </div>
       </main>
 
@@ -465,11 +504,182 @@ function LibraryPage({ savedVerses, toggleSaved, copyVerse, searchQuery }) {
 }
 
 function CommunitiesPage({ communities, onCreate, navigate, currentUser, showToast }) {
-  return <div className="page inner-page communities-page"><div className="page-heading"><div><p className="eyebrow"><Users size={14} /> Learn together</p><h1>Find your people</h1><p className="page-intro">Faith grows in good company. Gather around questions that matter.</p></div><button className="primary-button" onClick={onCreate}><Plus size={16} /> Create a community</button></div><section className="community-hero"><div><span className="soft-badge"><Globe2 size={13} /> A global table</span><h2>There’s room<br />for your questions.</h2><p>Whether you’re studying Greek, reading through a Gospel, or simply trying to live out what you believe — you belong here.</p><button className="light-link" onClick={() => showToast('Showing communities near you soon.')}><span>How communities work</span><ArrowRight size={15} /></button></div><div className="community-hero-art"><div className="table-circle" /><div className="person person-a">A</div><div className="person person-b">R</div><div className="person person-c">J</div><div className="person person-d">M</div><div className="paper-note">bring<br /><em>your wonder</em></div></div></section><div className="community-section-heading"><div><p className="eyebrow">Open doors</p><h2>Communities to explore</h2></div><div className="community-sort">Most active <ChevronDown size={14} /></div></div><div className="community-grid">{communities.map((community) => <CommunityCard key={community.id} community={community} onClick={() => showToast(`Welcome to ${community.name}.`)} />)}<button className="new-community-card" onClick={onCreate}><div className="new-community-icon"><Plus size={20} /></div><strong>Start something meaningful</strong><span>Create a space for your study, questions, and people.</span></button></div><div className="community-guidelines"><ShieldCheck size={19} /><div><strong>A kind, curious corner of the internet</strong><p>We listen generously, ask honest questions, and leave room for one another’s stories.</p></div><button className="text-button" onClick={() => showToast('Community guidelines opened.')}>Read guidelines <ArrowRight size={14} /></button></div></div>
+  return <div className="page inner-page communities-page"><div className="page-heading"><div><p className="eyebrow"><Users size={14} /> Learn together</p><h1>Find your people</h1><p className="page-intro">Faith grows in good company. Gather around questions that matter.</p></div><button className="primary-button" onClick={onCreate}><Plus size={16} /> Create a community</button></div><section className="community-hero"><div><span className="soft-badge"><Globe2 size={13} /> A global table</span><h2>There’s room<br />for your questions.</h2><p>Whether you’re studying Greek, reading through a Gospel, or simply trying to live out what you believe — you belong here.</p><button className="light-link" onClick={() => showToast('Showing communities near you soon.')}><span>How communities work</span><ArrowRight size={15} /></button></div><div className="community-hero-art"><div className="table-circle" /><div className="person person-a">A</div><div className="person person-b">R</div><div className="person person-c">J</div><div className="person person-d">M</div><div className="paper-note">bring<br /><em>your wonder</em></div></div></section><div className="community-section-heading"><div><p className="eyebrow">Open doors</p><h2>Communities to explore</h2></div><div className="community-sort">Most active <ChevronDown size={14} /></div></div><div className="community-grid">{communities.map((community) => <CommunityCard key={community.id} community={community} onClick={() => showToast(`Welcome to ${community.name}.`)} />)}<button className="new-community-card" onClick={onCreate}><div className="new-community-icon"><Plus size={20} /></div><strong>Start something meaningful</strong><span>Create a space for your study, questions, and people.</span></button></div><section className="community-app-strip"><div className="community-app-copy"><p className="eyebrow"><Sparkles size={13} /> Take the table with you</p><h2>Study together,<br /><em>wherever you are.</em></h2><p>Follow a conversation on the train, save the verse that meets you between tasks, and return to the table when you’re ready.</p><ul className="community-app-points"><li><Check size={14} /> Reading plans and verse collections that travel with you</li><li><Check size={14} /> Gentle reminders that feel like invitations, never noise</li><li><Check size={14} /> Every community conversation, in your pocket</li></ul><div className="community-app-actions">{currentUser ? <button className="primary-button" onClick={() => showToast('The mobile app is coming soon.')}>Get the app <ArrowRight size={15} /></button> : <button className="primary-button" onClick={() => navigate('signup')}>Join Scripture Space <ArrowRight size={15} /></button>}<button className="text-button" onClick={() => showToast('Mobile preview — coming to pockets soon.')}>App preview</button></div></div><PhonePreview compact /></section><div className="community-guidelines"><ShieldCheck size={19} /><div><strong>A kind, curious corner of the internet</strong><p>We listen generously, ask honest questions, and leave room for one another’s stories.</p></div><button className="text-button" onClick={() => showToast('Community guidelines opened.')}>Read guidelines <ArrowRight size={14} /></button></div></div>
 }
 
 function CommunityCard({ community, onClick }) {
   return <article className="community-card"><div className={`community-art ${community.color}`}><div className="community-lines" /><span>{community.initials}</span><div className="member-stack"><Avatar name="Amina" tone="peach" /><Avatar name="Ruth" tone="blue" /><span>+{Math.max(community.members - 2, 1)}</span></div></div><div className="community-card-body"><div className="community-card-topic">{community.topic}<span>·</span><span className="active-dot" /> {community.active}</div><h3>{community.name}</h3><p>{community.description}</p><div className="community-card-footer"><span><Users size={14} /> {community.members} members</span><button className="circle-arrow" onClick={onClick} aria-label={`Open ${community.name}`}><ArrowRight size={16} /></button></div></div></article>
+}
+
+function AuthPageShell({ children, previewNote }) {
+  return (
+    <div className="page auth-page">
+      <div className="auth-layout">
+        <div className="auth-panel">{children}</div>
+        <div className="auth-preview">
+          <PhonePreview />
+          <div className="auth-preview-note"><Sparkles size={14} /><span>{previewNote}</span></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function LoginPage({ navigate, showToast }) {
+  const [email, setEmail] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sentTo, setSentTo] = useState('')
+  const [error, setError] = useState('')
+
+  const submit = async (event) => {
+    event.preventDefault()
+    setError('')
+    setSending(true)
+    const address = email.trim()
+    const { error: authError } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: { emailRedirectTo: window.location.origin },
+    })
+    setSending(false)
+    if (authError) {
+      setError(authError.message || 'Unable to send your sign-in link right now.')
+      return
+    }
+    setSentTo(address)
+    showToast('Check your inbox for a secure sign-in link.')
+  }
+
+  return (
+    <AuthPageShell previewNote="“Be still, and know that I am God.” — Psalm 46:10">
+      {sentTo ? (
+        <div className="auth-success">
+          <div className="auth-success-icon"><Check size={23} /></div>
+          <p className="eyebrow">Link sent</p>
+          <h1 className="auth-title">Check your inbox.</h1>
+          <p className="auth-intro">We sent a secure sign-in link to <strong>{sentTo}</strong>. Open it on this device and you’ll step right back into your quiet space.</p>
+          <button className="outline-button full" onClick={() => setSentTo('')}>Use a different email</button>
+          <button className="text-button auth-back" onClick={() => navigate('home')}><ArrowLeft size={14} /> Back to home</button>
+        </div>
+      ) : (
+        <>
+          <p className="eyebrow"><LogIn size={14} /> Welcome back</p>
+          <h1 className="auth-title">Step back into <em>your quiet space.</em></h1>
+          <p className="auth-intro">Sign in to pick up where you left off — your saved verses, private reflections, and communities are waiting for you.</p>
+          <form className="auth-form" onSubmit={submit}>
+            <label className="field-label">Email address<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" autoFocus /></label>
+            {error && <div className="form-error">{error}</div>}
+            <button className="primary-button full" disabled={sending}>{sending ? 'Sending link…' : 'Send my sign-in link'} <Mail size={15} /></button>
+          </form>
+          <p className="auth-footnote"><LockKeyhole size={13} /> Passwordless and secure through Supabase</p>
+          <div className="auth-divider"><span>New to Scripture Space?</span></div>
+          <button className="outline-button full" onClick={() => navigate('signup')}>Create an account <ArrowRight size={14} /></button>
+        </>
+      )}
+    </AuthPageShell>
+  )
+}
+
+function SignupPage({ navigate, showToast }) {
+  const [email, setEmail] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sentTo, setSentTo] = useState('')
+  const [error, setError] = useState('')
+
+  const perks = [
+    'Save the verses that meet you and return to them anytime.',
+    'Write private reflections that stay between you and God.',
+    'Study alongside thoughtful communities at your own pace.',
+  ]
+
+  const submit = async (event) => {
+    event.preventDefault()
+    setError('')
+    setSending(true)
+    const address = email.trim()
+    const { error: authError } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: { emailRedirectTo: window.location.origin },
+    })
+    setSending(false)
+    if (authError) {
+      setError(authError.message || 'Unable to create your account right now.')
+      return
+    }
+    setSentTo(address)
+    showToast('Welcome! Check your inbox to confirm your account.')
+  }
+
+  return (
+    <AuthPageShell previewNote="“Your word is a lamp for my feet, a light on my path.” — Psalm 119:105">
+      {sentTo ? (
+        <div className="auth-success">
+          <div className="auth-success-icon"><Check size={23} /></div>
+          <p className="eyebrow">Almost there</p>
+          <h1 className="auth-title">One last step.</h1>
+          <p className="auth-intro">We sent a confirmation link to <strong>{sentTo}</strong>. Open it to activate your account and step into your new space.</p>
+          <button className="outline-button full" onClick={() => setSentTo('')}>Use a different email</button>
+          <p className="auth-footnote"><ShieldCheck size={13} /> Your account activates the moment you open the link</p>
+        </div>
+      ) : (
+        <>
+          <p className="eyebrow"><Sparkles size={14} /> Begin your rhythm</p>
+          <h1 className="auth-title">Make room for <em>the Word.</em></h1>
+          <p className="auth-intro">Create your free Scripture Space account and keep your whole journey — verses, reflections, and community — in one quiet place.</p>
+          <ul className="auth-perks">
+            {perks.map((perk) => <li key={perk}><Check size={15} /><span>{perk}</span></li>)}
+          </ul>
+          <form className="auth-form" onSubmit={submit}>
+            <label className="field-label">Email address<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" autoFocus /></label>
+            {error && <div className="form-error">{error}</div>}
+            <button className="primary-button full" disabled={sending}>{sending ? 'Creating your space…' : 'Create my account'} <ArrowRight size={15} /></button>
+          </form>
+          <p className="auth-footnote"><LockKeyhole size={13} /> Passwordless sign-up — we’ll email you one secure link</p>
+          <div className="auth-divider"><span>Already have an account?</span></div>
+          <button className="outline-button full" onClick={() => navigate('login')}>Log in instead</button>
+        </>
+      )}
+    </AuthPageShell>
+  )
+}
+
+function PhonePreview({ compact = false }) {
+  return (
+    <div className={`pv-scene ${compact ? 'compact' : ''}`} aria-hidden="true">
+      <div className="pv-glow" />
+      <div className="pv-float pv-float-top">
+        <div className="pv-float-icon"><Flame size={12} /></div>
+        <div><strong>4 day rhythm</strong><small>Keep making room for the Word</small></div>
+      </div>
+      <div className="pv-phone">
+        <div className="pv-notch" />
+        <div className="pv-screen">
+          <div className="pv-status"><span>9:41</span><span>● ◒ ▴</span></div>
+          <div className="pv-appbar"><div className="pv-app-mark"><CrossMark /></div><Bell size={10} /></div>
+          <p className="pv-greeting">Good morning, friend <span>✦</span></p>
+          <div className="pv-verse-card">
+            <small><Sparkles size={8} /> Verse of the day</small>
+            <strong>“Be still, and know that I am God.”</strong>
+            <span className="pv-ref">Psalm 46:10 · NIV</span>
+            <div className="pv-verse-actions"><i><BookmarkCheck size={9} /></i><i><Send size={8} /></i></div>
+          </div>
+          <div className="pv-plan">
+            <div className="pv-plan-icon"><BookOpen size={9} /></div>
+            <div className="pv-plan-copy"><strong>Day 04 · The practice of trust</strong><em>Proverbs 3:1–12</em><div className="pv-progress"><i /></div></div>
+          </div>
+          <div className="pv-community">
+            <div className="pv-community-badge">SC</div>
+            <div><strong>The Scholars’ Circle</strong><em>12 studying now</em></div>
+            <ArrowRight size={9} />
+          </div>
+          <div className="pv-tabbar"><Home size={11} className="active" /><BookOpen size={11} /><Users size={11} /><Bookmark size={11} /></div>
+        </div>
+      </div>
+      <div className="pv-float pv-float-bottom">
+        <div className="pv-float-icon green"><Check size={12} /></div>
+        <div><strong>Verse saved</strong><small>Find it in your library anytime</small></div>
+      </div>
+    </div>
+  )
 }
 
 function BookmarksPage({ savedVerses, toggleSaved, copyVerse, navigate }) {
