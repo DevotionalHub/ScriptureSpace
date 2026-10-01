@@ -3,102 +3,517 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta name="theme-color" content="#172554" />
-    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="Create your free Scripture Space account and make room for the Word."
+    />
 
-    <meta name="description" content="Create your free Scripture Space account to read, save, and reflect on scripture." />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
+    />
 
-    <link rel="icon" type="image/png" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
-    <link rel="apple-touch-icon" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
+    <link
+      rel="apple-touch-icon"
+      href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
+    />
 
-    <link rel="stylesheet" href="/theme.css" />
+    <title>Create an account · Scripture Space</title>
 
-    <title>Sign up · Scripture Space</title>
+    <style>
+      :root {
+        --navy: #172554;
+        --gold: #d4a72c;
+        --gold-light: #f2ce67;
+        --off-white: #fafaf7;
+        --soft-gray: #e5e7eb;
+        --charcoal: #1f2937;
+        --muted: #6b7280;
+        --success: #55742e;
+        --error: #b4534c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        color: var(--charcoal);
+        background: var(--navy);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .signup-page {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: minmax(350px, 0.95fr) minmax(420px, 1.05fr);
+      }
+
+      .signup-art {
+        position: relative;
+        overflow: hidden;
+        min-height: 700px;
+        padding: 36px clamp(26px, 6vw, 88px);
+        color: var(--off-white);
+        background:
+          radial-gradient(
+            circle at 78% 24%,
+            rgba(212, 167, 44, 0.34),
+            transparent 24%
+          ),
+          linear-gradient(145deg, #172554, #111b42 78%);
+      }
+
+      .signup-art::before {
+        content: "";
+        position: absolute;
+        right: -12%;
+        bottom: -21%;
+        width: 520px;
+        height: 520px;
+        border: 1px solid rgba(242, 206, 103, 0.28);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 35px rgba(242, 206, 103, 0.05),
+          0 0 0 95px rgba(242, 206, 103, 0.035);
+      }
+
+      .signup-art::after {
+        content: "✦";
+        position: absolute;
+        top: 22%;
+        right: 19%;
+        color: var(--gold);
+        font-size: 62px;
+        opacity: 0.72;
+      }
+
+      .brand {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--off-white);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.6px;
+      }
+
+      .brand img {
+        width: 39px;
+        height: 39px;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+
+      .brand span span {
+        font-weight: 400;
+      }
+
+      .art-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 490px;
+        margin-top: clamp(90px, 17vh, 180px);
+      }
+
+      .art-kicker {
+        color: var(--gold-light);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+      }
+
+      .art-copy h1 {
+        margin: 18px 0 16px;
+        color: var(--off-white);
+        font: 400 clamp(42px, 5vw, 68px) / 0.96 Georgia, serif;
+        letter-spacing: -4px;
+      }
+
+      .art-copy p {
+        max-width: 390px;
+        margin: 0;
+        color: #cbd5e1;
+        font: 16px / 1.5 Georgia, serif;
+      }
+
+      .benefits {
+        display: grid;
+        gap: 12px;
+        margin-top: 35px;
+      }
+
+      .benefit {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: #e5e7eb;
+        font-size: 12px;
+      }
+
+      .benefit-icon {
+        width: 25px;
+        height: 25px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: var(--navy);
+        background: var(--gold);
+        font-size: 12px;
+      }
+
+      .art-quote {
+        position: absolute;
+        z-index: 1;
+        right: clamp(26px, 8vw, 100px);
+        bottom: 42px;
+        color: #9ca3af;
+        font: italic 12px Georgia, serif;
+      }
+
+      .signup-panel {
+        display: grid;
+        place-items: center;
+        padding: 32px;
+        background: var(--off-white);
+      }
+
+      .signup-card {
+        width: min(100%, 430px);
+        padding: 32px;
+        border: 1px solid var(--soft-gray);
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 20px 60px rgba(23, 37, 84, 0.12);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 35px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .back-link:hover {
+        color: var(--navy);
+      }
+
+      .card-kicker {
+        margin-bottom: 9px;
+        color: #8b6a12;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+
+      .signup-card h2 {
+        margin: 0 0 10px;
+        color: var(--navy);
+        font: 400 32px / 1.05 Georgia, serif;
+        letter-spacing: -1px;
+      }
+
+      .intro {
+        margin: 0 0 26px;
+        color: var(--muted);
+        font: 15px / 1.45 Georgia, serif;
+      }
+
+      .field-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--charcoal);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .field-label input {
+        width: 100%;
+        margin-top: 7px;
+        padding: 13px 12px;
+        border: 1px solid var(--soft-gray);
+        border-radius: 7px;
+        color: var(--charcoal);
+        background: var(--off-white);
+        outline: 0;
+        font-size: 13px;
+      }
+
+      .field-label input::placeholder {
+        color: #9ca3af;
+      }
+
+      .field-label input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212, 167, 44, 0.16);
+      }
+
+      .submit {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 13px 15px;
+        border: 0;
+        border-radius: 7px;
+        color: var(--navy);
+        background: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .submit:hover {
+        background: #e7be4b;
+        transform: translateY(-1px);
+      }
+
+      .submit:disabled {
+        opacity: 0.65;
+        cursor: wait;
+        transform: none;
+      }
+
+      .status {
+        min-height: 18px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .status.error {
+        color: var(--error);
+      }
+
+      .status.success {
+        color: var(--success);
+      }
+
+      .security-note {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin: 19px 0 0;
+        padding-top: 17px;
+        border-top: 1px solid var(--soft-gray);
+        color: #9ca3af;
+        font-size: 10px;
+      }
+
+      .security-note span {
+        color: var(--navy);
+        font-size: 13px;
+      }
+
+      .auth-footer {
+        margin: 22px 0 0;
+        color: #9ca3af;
+        font-size: 10px;
+        text-align: center;
+      }
+
+      .auth-footer a {
+        color: #8b6a12;
+        font-weight: 700;
+      }
+
+      .terms {
+        margin: 17px 0 0;
+        color: #9ca3af;
+        font-size: 9px;
+        line-height: 1.45;
+        text-align: center;
+      }
+
+      @media (max-width: 760px) {
+        .signup-page {
+          display: block;
+        }
+
+        .signup-art {
+          min-height: 330px;
+          padding: 25px;
+        }
+
+        .signup-art::after {
+          top: 15%;
+          right: 13%;
+          font-size: 48px;
+        }
+
+        .signup-art::before {
+          right: -32%;
+          bottom: -54%;
+          width: 380px;
+          height: 380px;
+        }
+
+        .art-copy {
+          margin-top: 72px;
+        }
+
+        .art-copy h1 {
+          margin: 12px 0 9px;
+          font-size: 42px;
+          letter-spacing: -2.5px;
+        }
+
+        .art-copy p {
+          max-width: 360px;
+          font-size: 14px;
+        }
+
+        .benefits,
+        .art-quote {
+          display: none;
+        }
+
+        .signup-panel {
+          display: block;
+          padding: 22px 15px 38px;
+        }
+
+        .signup-card {
+          max-width: 480px;
+          margin: 0 auto;
+          padding: 26px 21px;
+        }
+
+        .back-link {
+          margin-bottom: 26px;
+        }
+      }
+    </style>
   </head>
 
-  <body>
-    <main class="auth-page">
-      <div class="auth-shell">
-        <header class="site-header compact">
-          <a class="site-brand" href="/" aria-label="Scripture Space home">
-            <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="Scripture Space logo" />
-            <span>Scripture<span>Space</span></span>
+  <body data-mode="signup">
+    <main class="signup-page">
+      <section class="signup-art">
+        <a
+          class="brand"
+          href="/"
+          aria-label="Return to Scripture Space home"
+        >
+          <img
+            src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
+            alt=""
+          />
+          <span>Scripture<span>Space</span></span>
+        </a>
+
+        <div class="art-copy">
+          <div class="art-kicker">Begin your rhythm</div>
+
+          <h1>Make room for the Word.</h1>
+
+          <p>
+            Create a quiet place for scripture, honest reflection,
+            and thoughtful community.
+          </p>
+
+          <div class="benefits" aria-label="Account benefits">
+            <div class="benefit">
+              <span class="benefit-icon">✓</span>
+              <span>Keep your saved verses wherever you go</span>
+            </div>
+
+            <div class="benefit">
+              <span class="benefit-icon">✓</span>
+              <span>Write private reflections without distraction</span>
+            </div>
+
+            <div class="benefit">
+              <span class="benefit-icon">✓</span>
+              <span>Find a thoughtful community for Bible study</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="art-quote">
+          “Your word is a lamp for my feet…” · Psalm 119:105
+        </div>
+      </section>
+
+      <section class="signup-panel">
+        <div class="signup-card">
+          <a class="back-link" href="/">
+            ← Back to Scripture Space
           </a>
 
-          <nav class="site-nav" aria-label="Main navigation">
-            <a href="/">Home</a>
-            <a href="/Communities.html">Communities</a>
-          </nav>
+          <div class="card-kicker">Your journey starts here</div>
 
-          <div class="auth-actions">
-            <a class="login-link" href="/login.html">Log in</a>
+          <h2>Create your account</h2>
+
+          <p class="intro">
+            Start your Bible journey with a secure email link.
+            No password to remember.
+          </p>
+
+          <form id="auth-form">
+            <label class="field-label" for="email">
+              Email address
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </label>
+
+            <button class="submit" id="auth-submit" type="submit">
+              Create my account <span>→</span>
+            </button>
+
+            <p id="auth-status" class="status" role="status"></p>
+          </form>
+
+          <div class="security-note">
+            <span>⌁</span>
+            Passwordless and secure through Supabase
           </div>
-        </header>
 
-        <section class="auth-split">
-          <div class="auth-pitch">
-            <div class="eyebrow">
-              <span class="eyebrow-mark">✦</span>
-              Start your daily rhythm
-            </div>
+          <p class="auth-footer">
+            Already have an account?
+            <a href="/login.html">Log in</a>
+          </p>
 
-            <h1>Make room for <em>the Word</em> every day.</h1>
-            <p>
-              Create a free account to open the Bible reader, save verses that meet
-              you, write private reflections, and find a community walking the same
-              road.
-            </p>
-
-            <ul class="auth-points">
-              <li><span class="point-mark">✓</span> Read scripture anytime, on any device</li>
-              <li><span class="point-mark">✓</span> Save and organize your favorite verses</li>
-              <li><span class="point-mark">✓</span> Join a thoughtful, welcoming community</li>
-            </ul>
-          </div>
-
-          <div class="auth-card">
-            <div class="auth-card-logo">
-              <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="" />
-              <span>Scripture<span>Space</span></span>
-            </div>
-
-            <p class="eyebrow">Create your account</p>
-            <h2>Begin your rhythm.</h2>
-            <p class="auth-card-copy">
-              Enter your name and email and we’ll send you a secure link to finish
-              creating your account — no password to remember.
-            </p>
-
-            <div id="signup-content">
-              <form id="signup-form">
-                <label class="form-field">
-                  Full name
-                  <input type="text" id="signup-name" name="name" placeholder="Your name" required autocomplete="name" />
-                </label>
-
-                <label class="form-field">
-                  Email address
-                  <input type="email" id="signup-email" name="email" placeholder="you@example.com" required autocomplete="email" />
-                </label>
-
-                <div id="signup-error" class="form-error" style="display:none"></div>
-
-                <button class="form-submit" type="submit" id="signup-submit">
-                  Create account <span aria-hidden="true">→</span>
-                </button>
-              </form>
-            </div>
-
-            <p class="form-note">🔒 Passwordless and secure through Supabase</p>
-
-            <div class="auth-switch">
-              Already have an account? <a href="/login.html">Log in</a>
-            </div>
-          </div>
-        </section>
-      </div>
+          <p class="terms">
+            By continuing, you agree to use Scripture Space with kindness,
+            curiosity, and respect for the people around the table.
+          </p>
+        </div>
+      </section>
     </main>
 
-    <script type="module" src="/src/signup.js"></script>
+    <script type="module" src="/src/auth-entry.js"></script>
   </body>
 </html>
