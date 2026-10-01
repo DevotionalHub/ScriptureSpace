@@ -1297,3 +1297,144 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Shared finishing touches for every public page */
+::selection {
+  color: var(--navy);
+  background: var(--gold-light);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+.site-header {
+  position: relative;
+  z-index: 10;
+}
+
+.site-brand,
+.login-link,
+.signup-link,
+.primary-cta,
+.secondary-cta,
+.community-join,
+.admin-signout,
+.form-submit {
+  min-height: 44px;
+}
+
+.site-brand img,
+.auth-card-logo img {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.auth-page,
+.admin-page-shell,
+.page-shell {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 90% 10%, rgba(212, 167, 44, 0.14), transparent 28rem),
+    linear-gradient(145deg, #172554 0%, #111d44 100%);
+}
+
+.auth-page::after,
+.admin-page-shell::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: auto auto -14rem -10rem;
+  width: 34rem;
+  height: 34rem;
+  border: 1px solid rgba(242, 206, 103, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5rem rgba(242, 206, 103, 0.025);
+  pointer-events: none;
+}
+
+.auth-card,
+.community-card,
+.admin-stat-card,
+.admin-table,
+.admin-gate-card {
+  box-shadow: 0 20px 55px rgba(4, 10, 30, 0.2);
+}
+
+.form-field input:hover {
+  border-color: #c9ced8;
+}
+
+.form-field input::placeholder {
+  color: #9299a5;
+}
+
+@media (max-width: 700px) {
+  .auth-shell,
+  .page-inner {
+    width: min(100% - 30px, 1200px);
+  }
+
+  .site-header {
+    gap: 12px;
+  }
+
+  .page-hero {
+    padding-top: 36px;
+  }
+
+  .admin-gate-card {
+    margin-top: 70px;
+    padding: 30px 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-brand > span {
+    font-size: 14px;
+  }
+
+  .admin-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table-head,
+  .admin-table-row {
+    grid-template-columns: 1fr 1fr;
+    padding-inline: 14px;
+  }
+
+  .admin-table-head span:nth-child(3),
+  .admin-table-row span:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
