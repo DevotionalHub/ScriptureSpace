@@ -580,9 +580,10 @@ function LoginPage({ navigate, showToast }) {
 }
 
 function SignupPage({ navigate, showToast }) {
-  const [email, setEmail] = useState('')
+  const [values, setValues] = useState({ name: '', email: '' })
+  const [covenant, setCovenant] = useState(false)
   const [sending, setSending] = useState(false)
-  const [sentTo, setSentTo] = useState('')
+  const [sentTo, setSentTo] = useState(null)
   const [error, setError] = useState('')
 
   const perks = [
@@ -591,21 +592,35 @@ function SignupPage({ navigate, showToast }) {
     'Study alongside thoughtful communities at your own pace.',
   ]
 
+  const update = (key) => (event) => setValues((current) => ({ ...current, [key]: event.target.value }))
+
   const submit = async (event) => {
     event.preventDefault()
     setError('')
+    if (!values.name.trim()) {
+      setError('Tell us what to call you so the community can welcome you by name.')
+      return
+    }
+    if (!covenant) {
+      setError('Please affirm the kindness covenant before joining the table.')
+      return
+    }
     setSending(true)
-    const address = email.trim()
+    const address = values.email.trim()
+    const fullName = values.name.trim()
     const { error: authError } = await supabase.auth.signInWithOtp({
       email: address,
-      options: { emailRedirectTo: window.location.origin },
+      options: {
+        emailRedirectTo: window.location.origin,
+        data: { full_name: fullName },
+      },
     })
     setSending(false)
     if (authError) {
       setError(authError.message || 'Unable to create your account right now.')
       return
     }
-    setSentTo(address)
+    setSentTo({ email: address, firstName: fullName.split(' ')[0] })
     showToast('Welcome! Check your inbox to confirm your account.')
   }
 
@@ -615,9 +630,9 @@ function SignupPage({ navigate, showToast }) {
         <div className="auth-success">
           <div className="auth-success-icon"><Check size={23} /></div>
           <p className="eyebrow">Almost there</p>
-          <h1 className="auth-title">One last step.</h1>
-          <p className="auth-intro">We sent a confirmation link to <strong>{sentTo}</strong>. Open it to activate your account and step into your new space.</p>
-          <button className="outline-button full" onClick={() => setSentTo('')}>Use a different email</button>
+          <h1 className="auth-title">Welcome, {sentTo.firstName}.</h1>
+          <p className="auth-intro">One last step, {sentTo.firstName} — we sent a confirmation link to <strong>{sentTo.email}</strong>. Open it to activate your account and step into your new space.</p>
+          <button className="outline-button full" onClick={() => setSentTo(null)}>Use a different email</button>
           <p className="auth-footnote"><ShieldCheck size={13} /> Your account activates the moment you open the link</p>
         </div>
       ) : (
@@ -629,7 +644,12 @@ function SignupPage({ navigate, showToast }) {
             {perks.map((perk) => <li key={perk}><Check size={15} /><span>{perk}</span></li>)}
           </ul>
           <form className="auth-form" onSubmit={submit}>
-            <label className="field-label">Email address<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoComplete="email" autoFocus /></label>
+            <label className="field-label">What should we call you?<input type="text" required value={values.name} onChange={update('name')} placeholder="Your first name" autoComplete="given-name" autoFocus /></label>
+            <label className="field-label">Email address<input type="email" required value={values.email} onChange={update('email')} placeholder="you@example.com" autoComplete="email" /></label>
+            <label className="auth-covenant">
+              <input type="checkbox" checked={covenant} onChange={(event) => setCovenant(event.target.checked)} />
+              <span>I’ll help keep this a kind, generous space — listening generously and leaving room for every seeker’s story.</span>
+            </label>
             {error && <div className="form-error">{error}</div>}
             <button className="primary-button full" disabled={sending}>{sending ? 'Creating your space…' : 'Create my account'} <ArrowRight size={15} /></button>
           </form>
