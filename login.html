@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#172554" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta name="description" content="Log in to Scripture Space to keep your saved verses, reflections, and communities with you." />
+
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
+
+    <link rel="stylesheet" href="/theme.css" />
+
+    <title>Log in · Scripture Space</title>
+  </head>
+
+  <body>
+    <main class="auth-page">
+      <div class="auth-shell">
+        <header class="site-header compact">
+          <a class="site-brand" href="/" aria-label="Scripture Space home">
+            <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="Scripture Space logo" />
+            <span>Scripture<span>Space</span></span>
+          </a>
+
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/Communities.html">Communities</a>
+          </nav>
+
+          <div class="auth-actions">
+            <a class="signup-link" href="/signup.html">Sign up <span>→</span></a>
+          </div>
+        </header>
+
+        <section class="auth-split">
+          <div class="auth-pitch">
+            <div class="eyebrow">
+              <span class="eyebrow-mark">✦</span>
+              Welcome back
+            </div>
+
+            <h1>Keep your place <em>in the Word.</em></h1>
+            <p>
+              Sign in to pick up right where you left off — your saved verses,
+              private reflections, and communities are all waiting for you.
+            </p>
+
+            <ul class="auth-points">
+              <li><span class="point-mark">✓</span> Your saved verses, synced everywhere</li>
+              <li><span class="point-mark">✓</span> Private reflections, just for you</li>
+              <li><span class="point-mark">✓</span> Your communities, one click away</li>
+            </ul>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-card-logo">
+              <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="" />
+              <span>Scripture<span>Space</span></span>
+            </div>
+
+            <p class="eyebrow">Welcome back</p>
+            <h2>Keep your place.</h2>
+            <p class="auth-card-copy">
+              Enter your email and we’ll send you a secure sign-in link. No password
+              to remember.
+            </p>
+
+            <div id="login-content">
+              <form id="login-form">
+                <label class="form-field">
+                  Email address
+                  <input type="email" id="login-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                </label>
+
+                <div id="login-error" class="form-error" style="display:none"></div>
+
+                <button class="form-submit" type="submit" id="login-submit">
+                  Continue with email <span aria-hidden="true">→</span>
+                </button>
+              </form>
+            </div>
+
+            <p class="form-note">🔒 Passwordless and secure through Supabase</p>
+
+            <div class="auth-switch">
+              New here? <a href="/signup.html">Create an account</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/login.js"></script>
+  </body>
+</html>

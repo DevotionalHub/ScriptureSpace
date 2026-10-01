@@ -137,8 +137,16 @@ const initialVisitors = [
   { initials: 'TO', name: 'Theo O.', location: 'Accra, GH', page: 'Genesis 1', time: '32 min ago', tone: 'gold' },
 ]
 
+const ALLOWED_PAGES = ['home', 'read', 'library', 'communities', 'bookmarks', 'notes']
+
+function getInitialPage() {
+  if (typeof window === 'undefined') return 'home'
+  const requested = new URLSearchParams(window.location.search).get('page')
+  return ALLOWED_PAGES.includes(requested) ? requested : 'home'
+}
+
 function App() {
-  const [activePage, setActivePage] = useState('home')
+  const [activePage, setActivePage] = useState(getInitialPage)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [authLoading, setAuthLoading] = useState(true)
@@ -282,7 +290,6 @@ function App() {
     communities: 'Find your people',
     bookmarks: 'Saved verses',
     notes: 'My reflections',
-    admin: 'Admin overview',
   }[activePage]
 
   return (
@@ -309,14 +316,6 @@ function App() {
               ))}
             </div>
           ))}
-          <div className="nav-section admin-nav-section">
-            <div className="nav-label">Workspace</div>
-            <button className={`nav-item ${activePage === 'admin' ? 'active' : ''}`} onClick={() => navigate('admin')}>
-              <ShieldCheck size={18} strokeWidth={activePage === 'admin' ? 2.2 : 1.8} />
-              <span>Admin panel</span>
-              <LockKeyhole size={13} className="nav-lock" />
-            </button>
-          </div>
         </nav>
 
         <div className="sidebar-bottom">
@@ -372,7 +371,6 @@ function App() {
           {activePage === 'communities' && <CommunitiesPage communities={communities} onCreate={() => setCreateCommunityOpen(true)} navigate={navigate} currentUser={currentUser} showToast={showToast} />}
           {activePage === 'bookmarks' && <BookmarksPage savedVerses={savedVerses} toggleSaved={toggleSaved} copyVerse={copyVerse} navigate={navigate} />}
           {activePage === 'notes' && <NotesPage showToast={showToast} />}
-          {activePage === 'admin' && <AdminPage isAdmin={isAdmin} currentUser={currentUser} openAuth={() => setAuthOpen(true)} visitors={visitors} setVisitors={setVisitors} showToast={showToast} />}
         </div>
       </main>
 

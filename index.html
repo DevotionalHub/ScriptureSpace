@@ -35,680 +35,9 @@
       href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
     />
 
+    <link rel="stylesheet" href="/theme.css" />
+
     <title>Scripture Space · A Bible app for your daily rhythm</title>
-
-    <style>
-      :root {
-        --navy: #172554;
-        --gold: #d4a72c;
-        --off-white: #fafaf7;
-        --soft-gray: #e5e7eb;
-        --charcoal: #1f2937;
-        --muted: #6b7280;
-        --gold-light: #f2ce67;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        background: var(--navy);
-        color: var(--off-white);
-        font-family:
-          Inter,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .hero-page {
-        position: relative;
-        min-height: 100vh;
-        overflow: hidden;
-        background: var(--navy);
-      }
-
-      .hero-page::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(
-            circle at 86% 46%,
-            rgba(212, 167, 44, 0.28),
-            transparent 29%
-          ),
-          radial-gradient(
-            circle at 66% 42%,
-            rgba(23, 37, 84, 0.25),
-            transparent 36%
-          ),
-          linear-gradient(
-            90deg,
-            rgba(23, 37, 84, 0.98) 0%,
-            rgba(23, 37, 84, 0.94) 37%,
-            rgba(23, 37, 84, 0.6) 67%,
-            rgba(23, 37, 84, 0.15) 100%
-          );
-      }
-
-      .hero-inner {
-        position: relative;
-        z-index: 1;
-        width: min(1370px, calc(100% - 80px));
-        min-height: 100vh;
-        margin: 0 auto;
-      }
-
-      .site-header {
-        height: 84px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 30px;
-      }
-
-      .site-brand {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--off-white);
-        font-size: 19px;
-        font-weight: 700;
-        letter-spacing: -0.7px;
-        white-space: nowrap;
-      }
-
-      .site-brand img {
-        width: 38px;
-        height: 38px;
-        object-fit: contain;
-        border-radius: 10px;
-      }
-
-      .site-brand span span {
-        font-weight: 400;
-      }
-
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: clamp(22px, 3.5vw, 53px);
-        margin-left: auto;
-        margin-right: 55px;
-        color: #e5e7eb;
-        font-size: 13px;
-      }
-
-      .site-nav a {
-        transition: color 0.2s ease;
-      }
-
-      .site-nav a:hover {
-        color: var(--gold-light);
-      }
-
-      .auth-actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .login-link {
-        color: var(--off-white);
-        font-size: 12px;
-      }
-
-      .login-link:hover {
-        color: var(--gold-light);
-      }
-
-      .signup-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 15px;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 24px;
-        color: var(--off-white);
-        font-size: 12px;
-        transition: 0.2s ease;
-      }
-
-      .signup-link:hover {
-        border-color: var(--gold);
-        color: var(--gold-light);
-        transform: translateY(-1px);
-      }
-
-      .hero-content {
-        min-height: calc(100vh - 84px);
-        display: grid;
-        grid-template-columns: minmax(430px, 0.95fr) minmax(400px, 1.05fr);
-        align-items: center;
-        gap: 30px;
-        padding-bottom: 52px;
-      }
-
-      .hero-copy {
-        padding: 15px 0 0 7.2%;
-      }
-
-      .eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--gold-light);
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      .eyebrow-mark {
-        width: 28px;
-        height: 28px;
-        display: grid;
-        place-items: center;
-        border-radius: 8px;
-        color: var(--navy);
-        background: var(--gold);
-      }
-
-      h1 {
-        max-width: 670px;
-        margin: 28px 0 23px;
-        color: var(--off-white);
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(51px, 6vw, 88px);
-        font-weight: 400;
-        letter-spacing: -5px;
-        line-height: 0.98;
-      }
-
-      h1 em {
-        color: var(--gold-light);
-        font-weight: 400;
-      }
-
-      .hero-description {
-        max-width: 600px;
-        margin: 0;
-        color: #d1d5db;
-        font-size: 15px;
-        line-height: 1.52;
-      }
-
-      .hero-actions {
-        display: flex;
-        align-items: center;
-        gap: 22px;
-        margin-top: 34px;
-      }
-
-      .primary-cta,
-      .secondary-cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 13px;
-        border-radius: 30px;
-        padding: 13px 20px;
-        font-size: 13px;
-        font-weight: 600;
-        transition: 0.2s ease;
-      }
-
-      .primary-cta {
-        color: var(--navy);
-        background: var(--gold);
-        box-shadow: 0 10px 28px rgba(212, 167, 44, 0.24);
-      }
-
-      .primary-cta:hover {
-        background: #e7be4b;
-        transform: translateY(-2px);
-      }
-
-      .secondary-cta {
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        color: var(--off-white);
-      }
-
-      .secondary-cta:hover {
-        border-color: var(--gold);
-        color: var(--gold-light);
-        transform: translateY(-2px);
-      }
-
-      .cta-arrow {
-        width: 24px;
-        height: 24px;
-        display: grid;
-        place-items: center;
-        border-radius: 50%;
-        color: var(--gold);
-        background: var(--off-white);
-      }
-
-      .hero-note {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        margin-top: 28px;
-        color: #9ca3af;
-        font-size: 11px;
-      }
-
-      .hero-note strong {
-        color: #e5e7eb;
-      }
-
-      .hero-note-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--gold);
-      }
-
-      .phone-scene {
-        position: relative;
-        height: min(680px, 76vh);
-        min-height: 510px;
-      }
-
-      .phone-glow {
-        position: absolute;
-        right: 3%;
-        top: 18%;
-        width: 70%;
-        height: 55%;
-        border-radius: 50%;
-        background: rgba(212, 167, 44, 0.3);
-        filter: blur(80px);
-      }
-
-      .phone {
-        position: absolute;
-        right: 8%;
-        top: 8%;
-        width: min(370px, 42vw);
-        aspect-ratio: 0.49;
-        padding: 9px;
-        border: 2px solid #9ca3af;
-        border-radius: 47px;
-        background: linear-gradient(
-          135deg,
-          #1f2937,
-          #070708 54%,
-          #6b7280
-        );
-        box-shadow:
-          -26px 34px 42px rgba(0, 0, 0, 0.55),
-          0 0 0 4px rgba(255, 255, 255, 0.08);
-        transform: rotate(13deg);
-      }
-
-      .phone::before {
-        content: "";
-        position: absolute;
-        z-index: 3;
-        top: 8px;
-        left: 50%;
-        width: 34%;
-        height: 21px;
-        border-radius: 20px;
-        background: #070707;
-        transform: translateX(-50%);
-      }
-
-      .phone-screen {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        border-radius: 38px;
-        background: linear-gradient(
-          160deg,
-          #f5d998 0 23%,
-          #d4a72c 35%,
-          #4f5262 61%,
-          #252638 100%
-        );
-      }
-
-      .phone-sun {
-        position: absolute;
-        top: 15%;
-        right: 12%;
-        width: 106px;
-        height: 106px;
-        border-radius: 50%;
-        background: rgba(250, 250, 247, 0.72);
-        filter: blur(4px);
-      }
-
-      .phone-mountains {
-        position: absolute;
-        right: -20%;
-        bottom: 24%;
-        width: 120%;
-        height: 49%;
-        background: #4f5262;
-        clip-path: polygon(
-          0 82%,
-          22% 44%,
-          37% 64%,
-          56% 13%,
-          76% 53%,
-          100% 24%,
-          100% 100%,
-          0 100%
-        );
-      }
-
-      .phone-mountains::after {
-        content: "";
-        position: absolute;
-        inset: 22% 0 0;
-        background: rgba(23, 37, 84, 0.72);
-        clip-path: polygon(
-          0 100%,
-          36% 40%,
-          49% 68%,
-          68% 8%,
-          100% 45%,
-          100% 100%
-        );
-      }
-
-      .phone-topbar {
-        position: absolute;
-        z-index: 2;
-        top: 7%;
-        left: 10%;
-        right: 10%;
-        display: flex;
-        justify-content: space-between;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 8px;
-        font-weight: 600;
-      }
-
-      .phone-tabs {
-        position: absolute;
-        z-index: 2;
-        top: 15%;
-        left: 10%;
-        display: flex;
-        gap: 14px;
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 8px;
-      }
-
-      .phone-tabs b {
-        color: white;
-        border-bottom: 2px solid var(--gold);
-        padding-bottom: 4px;
-      }
-
-      .phone-card {
-        position: absolute;
-        z-index: 2;
-        left: 9%;
-        right: 9%;
-        bottom: 9%;
-        padding: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 13px;
-        color: white;
-        background: rgba(23, 37, 84, 0.78);
-        backdrop-filter: blur(12px);
-      }
-
-      .phone-card small {
-        color: var(--gold-light);
-        font-size: 7px;
-        text-transform: uppercase;
-        letter-spacing: 0.7px;
-      }
-
-      .phone-card strong {
-        display: block;
-        margin-top: 8px;
-        font-family: Georgia, serif;
-        font-size: 16px;
-        font-weight: 400;
-      }
-
-      .phone-card span {
-        display: block;
-        margin-top: 4px;
-        color: #d1d5db;
-        font-size: 7px;
-      }
-
-      .floating-card {
-        position: absolute;
-        z-index: 4;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 11px 13px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 10px;
-        color: var(--off-white);
-        background: rgba(23, 37, 84, 0.82);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.22);
-        backdrop-filter: blur(12px);
-        font-size: 10px;
-      }
-
-      .floating-card strong {
-        display: block;
-        font-size: 11px;
-      }
-
-      .floating-card small {
-        display: block;
-        margin-top: 4px;
-        color: #d1d5db;
-        font-size: 8px;
-      }
-
-      .floating-icon {
-        width: 27px;
-        height: 27px;
-        display: grid;
-        place-items: center;
-        border-radius: 8px;
-        color: var(--navy);
-        background: var(--gold);
-      }
-
-      .float-top {
-        top: 24%;
-        left: 2%;
-      }
-
-      .float-bottom {
-        right: 0;
-        bottom: 16%;
-      }
-
-      .hero-footer {
-        position: absolute;
-        right: 7.2%;
-        bottom: 23px;
-        left: 7.2%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: #9ca3af;
-        font-size: 10px;
-      }
-
-      .hero-footer span {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .footer-rule {
-        width: 35px;
-        height: 1px;
-        background: #9ca3af;
-      }
-
-      @media (max-width: 900px) {
-        .hero-inner {
-          width: min(100% - 38px, 680px);
-        }
-
-        .site-nav {
-          display: none;
-        }
-
-        .site-header {
-          height: 72px;
-        }
-
-        .hero-content {
-          display: block;
-          padding-top: 48px;
-        }
-
-        .hero-copy {
-          padding: 0;
-        }
-
-        .phone-scene {
-          height: 550px;
-          margin-top: 10px;
-        }
-
-        .phone {
-          right: 17%;
-          width: 255px;
-        }
-
-        .float-top {
-          left: 4%;
-          top: 20%;
-        }
-
-        .float-bottom {
-          right: 3%;
-          bottom: 16%;
-        }
-
-        .hero-footer {
-          right: 0;
-          left: 0;
-        }
-      }
-
-      @media (max-width: 520px) {
-        .hero-inner {
-          width: calc(100% - 30px);
-        }
-
-        .site-brand {
-          font-size: 16px;
-        }
-
-        .site-brand img {
-          width: 32px;
-          height: 32px;
-        }
-
-        .auth-actions {
-          gap: 8px;
-        }
-
-        .login-link {
-          font-size: 10px;
-        }
-
-        .signup-link {
-          padding: 8px 10px;
-          font-size: 10px;
-        }
-
-        .hero-content {
-          padding-top: 32px;
-        }
-
-        .hero-actions {
-          align-items: stretch;
-          flex-direction: column;
-          gap: 12px;
-          width: 220px;
-        }
-
-        .primary-cta,
-        .secondary-cta {
-          width: 100%;
-        }
-
-        .phone-scene {
-          height: 470px;
-          min-height: 0;
-        }
-
-        .phone {
-          right: 11%;
-          width: 205px;
-          border-radius: 30px;
-        }
-
-        .phone-screen {
-          border-radius: 24px;
-        }
-
-        .floating-card {
-          transform: scale(0.85);
-        }
-
-        .float-top {
-          left: -10px;
-        }
-
-        .float-bottom {
-          right: -12px;
-        }
-
-        .hero-footer {
-          position: relative;
-          right: auto;
-          bottom: auto;
-          left: auto;
-          margin-top: 12px;
-        }
-
-        .hero-footer span:last-child {
-          display: none;
-        }
-
-        h1 {
-          font-size: clamp(45px, 14vw, 66px);
-          letter-spacing: -3px;
-        }
-      }
-    </style>
   </head>
 
   <body>
@@ -716,139 +45,135 @@
       Scripture Space needs JavaScript enabled to open the Bible reader.
     </noscript>
 
-    <div id="root">
-      <main class="hero-page">
-        <div class="hero-inner">
-          <header class="site-header">
-            <a
-              class="site-brand"
-              href="/#/home"
-              aria-label="Scripture Space home"
-            >
-              <img
-                src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
-                alt=""
-              />
-              <span>Scripture<span>Space</span></span>
+    <main class="hero-page">
+      <div class="hero-inner">
+        <header class="site-header">
+          <a
+            class="site-brand"
+            href="/"
+            aria-label="Scripture Space home"
+          >
+            <img
+              src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
+              alt="Scripture Space logo"
+            />
+            <span>Scripture<span>Space</span></span>
+          </a>
+
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/signup.html">Read Bible</a>
+            <a href="/signup.html">Verse library</a>
+            <a href="/Communities.html">Communities</a>
+          </nav>
+
+          <div class="auth-actions">
+            <a class="login-link" href="/login.html">
+              Log in
             </a>
 
-            <nav class="site-nav" aria-label="Main navigation">
-              <a href="/#/home">Home</a>
-              <a href="/#/read">Read Bible</a>
-              <a href="/#/library">Verse library</a>
-              <a href="/#/communities">Communities</a>
-            </nav>
+            <a class="signup-link" href="/signup.html">
+              Sign up <span>→</span>
+            </a>
+          </div>
+        </header>
 
-            <div class="auth-actions">
-              <a class="login-link" href="/?auth=login">
-                Log in
+        <section class="hero-content">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-mark">✦</span>
+              Bible app for your daily rhythm
+            </div>
+
+            <h1>
+              The Bible,
+              <em>made for your</em>
+              daily rhythm
+            </h1>
+
+            <p class="hero-description">
+              Create a quiet space to read scripture, save the verses that
+              meet you, write private reflections, and study alongside a
+              thoughtful community.
+            </p>
+
+            <div class="hero-actions">
+              <a class="primary-cta" href="/signup.html">
+                Open the Bible
+                <span class="cta-arrow">→</span>
               </a>
 
-              <a class="signup-link" href="/?auth=signup">
-                Sign up <span>→</span>
+              <a class="secondary-cta" href="/Communities.html">
+                Find your community
               </a>
             </div>
-          </header>
 
-          <section class="hero-content">
-            <div class="hero-copy">
-              <div class="eyebrow">
-                <span class="eyebrow-mark">✦</span>
-                Bible app for your daily rhythm
-              </div>
+            <div class="hero-note">
+              <span class="hero-note-dot"></span>
+              <span>
+                <strong>Today’s invitation:</strong>
+                Be still, and know that I am God.
+              </span>
+            </div>
+          </div>
 
-              <h1>
-                The Bible,
-                <em>made for your</em>
-                daily rhythm
-              </h1>
+          <div class="phone-scene" aria-label="Scripture Space app preview">
+            <div class="phone-glow"></div>
 
-              <p class="hero-description">
-                Create a quiet space to read scripture, save the verses that
-                meet you, write private reflections, and study alongside a
-                thoughtful community.
-              </p>
-
-              <div class="hero-actions">
-                <a class="primary-cta" href="/#/read">
-                  Open the Bible
-                  <span class="cta-arrow">→</span>
-                </a>
-
-                <a class="secondary-cta" href="/#/communities">
-                  Find your community
-                </a>
-              </div>
-
-              <div class="hero-note">
-                <span class="hero-note-dot"></span>
-                <span>
-                  <strong>Today’s invitation:</strong>
-                  Be still, and know that I am God.
-                </span>
+            <div class="floating-card float-top">
+              <div class="floating-icon">✧</div>
+              <div>
+                <strong>Most popular verse</strong>
+                <small>John 3:16 · Saved by thousands</small>
               </div>
             </div>
 
-            <div class="phone-scene" aria-label="Scripture Space app preview">
-              <div class="phone-glow"></div>
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="phone-sun"></div>
+                <div class="phone-mountains"></div>
 
-              <div class="floating-card float-top">
-                <div class="floating-icon">✧</div>
-                <div>
-                  <strong>Verse of the day</strong>
-                  <small>Psalm 46:10 · Saved</small>
+                <div class="phone-topbar">
+                  <span>9:41</span>
+                  <span>● ◒ ▴</span>
                 </div>
-              </div>
 
-              <div class="phone">
-                <div class="phone-screen">
-                  <div class="phone-sun"></div>
-                  <div class="phone-mountains"></div>
-
-                  <div class="phone-topbar">
-                    <span>9:41</span>
-                    <span>● ◒ ▴</span>
-                  </div>
-
-                  <div class="phone-tabs">
-                    <b>Today</b>
-                    <span>Community</span>
-                  </div>
-
-                  <div class="phone-card">
-                    <small>Morning reflection</small>
-                    <strong>
-                      Be still, and know that I am God.
-                    </strong>
-                    <span>
-                      Psalm 46:10 · New International Version
-                    </span>
-                  </div>
+                <div class="phone-tabs">
+                  <b>Today</b>
+                  <span>Community</span>
                 </div>
-              </div>
 
-              <div class="floating-card float-bottom">
-                <div class="floating-icon">✓</div>
-                <div>
-                  <strong>4 day rhythm</strong>
-                  <small>Keep making room for the Word</small>
+                <div class="phone-card">
+                  <small>Most popular verse</small>
+                  <strong>
+                    For God so loved the world that he gave his one and only Son.
+                  </strong>
+                  <span>
+                    John 3:16 · New International Version
+                  </span>
                 </div>
               </div>
             </div>
-          </section>
 
-          <footer class="hero-footer">
-            <span>
-              <i class="footer-rule"></i>
-              Scripture, reflection, community
-            </span>
+            <div class="floating-card float-bottom">
+              <div class="floating-icon">✓</div>
+              <div>
+                <strong>4 day rhythm</strong>
+                <small>Keep making room for the Word</small>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <span>Scroll to begin ↓</span>
-          </footer>
-        </div>
-      </main>
-    </div>
+        <footer class="hero-footer">
+          <span>
+            <i class="footer-rule"></i>
+            Scripture, reflection, community
+          </span>
 
-    <script type="module" src="/src/main.jsx"></script>
+          <span>Scroll to begin ↓</span>
+        </footer>
+      </div>
+    </main>
   </body>
 </html>
