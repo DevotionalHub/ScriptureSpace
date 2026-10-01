@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#172554" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta name="description" content="Create your free Scripture Space account to read, save, and reflect on scripture." />
+
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" />
+
+    <link rel="stylesheet" href="/theme.css" />
+
+    <title>Sign up · Scripture Space</title>
+  </head>
+
+  <body>
+    <main class="auth-page">
+      <div class="auth-shell">
+        <header class="site-header compact">
+          <a class="site-brand" href="/" aria-label="Scripture Space home">
+            <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="Scripture Space logo" />
+            <span>Scripture<span>Space</span></span>
+          </a>
+
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/Communities.html">Communities</a>
+          </nav>
+
+          <div class="auth-actions">
+            <a class="login-link" href="/login.html">Log in</a>
+          </div>
+        </header>
+
+        <section class="auth-split">
+          <div class="auth-pitch">
+            <div class="eyebrow">
+              <span class="eyebrow-mark">✦</span>
+              Start your daily rhythm
+            </div>
+
+            <h1>Make room for <em>the Word</em> every day.</h1>
+            <p>
+              Create a free account to open the Bible reader, save verses that meet
+              you, write private reflections, and find a community walking the same
+              road.
+            </p>
+
+            <ul class="auth-points">
+              <li><span class="point-mark">✓</span> Read scripture anytime, on any device</li>
+              <li><span class="point-mark">✓</span> Save and organize your favorite verses</li>
+              <li><span class="point-mark">✓</span> Join a thoughtful, welcoming community</li>
+            </ul>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-card-logo">
+              <img src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png" alt="" />
+              <span>Scripture<span>Space</span></span>
+            </div>
+
+            <p class="eyebrow">Create your account</p>
+            <h2>Begin your rhythm.</h2>
+            <p class="auth-card-copy">
+              Enter your name and email and we’ll send you a secure link to finish
+              creating your account — no password to remember.
+            </p>
+
+            <div id="signup-content">
+              <form id="signup-form">
+                <label class="form-field">
+                  Full name
+                  <input type="text" id="signup-name" name="name" placeholder="Your name" required autocomplete="name" />
+                </label>
+
+                <label class="form-field">
+                  Email address
+                  <input type="email" id="signup-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                </label>
+
+                <div id="signup-error" class="form-error" style="display:none"></div>
+
+                <button class="form-submit" type="submit" id="signup-submit">
+                  Create account <span aria-hidden="true">→</span>
+                </button>
+              </form>
+            </div>
+
+            <p class="form-note">🔒 Passwordless and secure through Supabase</p>
+
+            <div class="auth-switch">
+              Already have an account? <a href="/login.html">Log in</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/signup.js"></script>
+  </body>
+</html>

@@ -23,7 +23,19 @@ VITE_SUPABASE_ANON_KEY=your_publishable_key_here
 ```
 
 4. In Supabase **Authentication → URL Configuration**, add your local URL and deployed URL to the redirect allow list. Sign-in is passwordless and sends a magic link.
-5. Add `sixtusonoriode2@gmail.com` as the only admin account. The UI gate and the `visit_logs` RLS select policy both enforce this address.
+5. Add `sixtusonoriode2@gmail.com` as the only admin account. The `admin.html` gate and the `visit_logs` RLS select policy both enforce this address.
+
+## Pages
+
+- `index.html` — public marketing landing page with a tilted phone preview of the app, featuring the most popular verse (John 3:16).
+- `signup.html` / `login.html` — standalone, responsive passwordless sign-up and log-in pages (Supabase magic link).
+- `Communities.html` — public communities directory. Joining a community requires signing up first.
+- `app.html` — the full Scripture Space dashboard (home, reader, verse library, communities, saved verses, reflections) built with React.
+- `admin.html` — standalone admin workspace restricted to `sixtusonoriode2@gmail.com`; everyone else sees a restricted-access gate. There is no public navigation link to it.
+
+Navigation on the landing page routes "Open the Bible" and "Read Bible" / "Verse library" to `signup.html`, "Find your community" / "Communities" to `Communities.html`, "Log in" to `login.html`, and "Sign up" to `signup.html`.
+
+All public-facing pages share the Deep Navy / Warm Gold / Off White / Soft Gray / Dark Charcoal palette and the supplied logo (also used as the favicon) defined in `public/theme.css`.
 
 ## Included areas
 
@@ -32,4 +44,4 @@ VITE_SUPABASE_ANON_KEY=your_publishable_key_here
 - Searchable verse library and saved verses collection.
 - Private reflections editor.
 - Community discovery and create-community flow for Bible scholars and readers.
-- Restricted admin panel with visit analytics, top pages, community joins, saved verse stats, and recent visits. Visit rows are populated from Supabase when the schema is available, with an intentional demo fallback for an unconfigured database.
+- Restricted admin workspace (`admin.html`) with visit analytics and recent visitor activity, gated to the single admin account.
