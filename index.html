@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="theme-color" content="#FAFAF7" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#101112" />
+    <meta name="color-scheme" content="dark" />
     <meta name="application-name" content="Scripture Space" />
 
     <meta
       name="description"
-      content="Scripture Space — a quieter place for scripture, reflection, and community."
+      content="Scripture Space — a Bible app for reading, reflection, and community."
     />
 
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Scripture Space · Find stillness in the Word"
+      content="Scripture Space · A Bible app for your daily rhythm"
     />
     <meta
       property="og:description"
@@ -35,17 +35,31 @@
       href="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
     />
 
-    <title>Scripture Space · Find stillness in the Word</title>
+    <title>Scripture Space · A Bible app for your daily rhythm</title>
 
     <style>
+      :root {
+        --night: #101112;
+        --cream: #f5f1e9;
+        --muted: #b7b1a9;
+        --line: rgba(255, 255, 255, 0.16);
+        --coral: #f06b6f;
+        --coral-light: #ff9590;
+        --gold: #d4a72c;
+      }
+
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        background: #FAFAF7;
-        color: #1F2937;
+        background: var(--night);
+        color: var(--cream);
         font-family:
           Inter,
           ui-sans-serif,
@@ -56,245 +70,641 @@
           sans-serif;
       }
 
-      .first-paint {
-        min-height: 100vh;
-        padding: 28px clamp(20px, 6vw, 84px) 56px;
-        color: #1F2937;
-        background: #FAFAF7;
-      }
-
-      .first-paint-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        max-width: 1160px;
-        margin: 0 auto 70px;
-      }
-
-      .first-paint-brand img {
-        width: 154px;
-        height: 50px;
-        object-fit: contain;
-        object-position: left center;
-      }
-
-      .first-paint-nav {
-        display: flex;
-        gap: 22px;
-        color: #4B5563;
-        font-size: 12px;
-      }
-
-      .first-paint-nav a {
+      a {
         color: inherit;
         text-decoration: none;
       }
 
-      .first-paint-nav a:hover {
-        color: #D4A72C;
-      }
-
-      .first-paint-button {
-        display: inline-flex;
-        align-items: center;
-        border: 0;
-        border-radius: 7px;
-        padding: 10px 16px;
-        color: #172554;
-        background: #D4A72C;
-        font-size: 11px;
-        font-weight: 600;
-        text-decoration: none;
+      button {
+        font: inherit;
         cursor: pointer;
       }
 
-      .first-paint-button:hover {
-        background: #B88616;
-      }
-
-      .first-paint-hero {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 34px;
-        align-items: stretch;
-        max-width: 1160px;
-        margin: 0 auto;
-      }
-
-      .first-paint-copy {
-        padding: 34px 0;
-      }
-
-      .first-paint-kicker {
-        color: #172554;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1.4px;
-        text-transform: uppercase;
-      }
-
-      .first-paint h1 {
-        max-width: 560px;
-        margin: 16px 0;
-        color: #172554;
-        font-family: Georgia, serif;
-        font-size: clamp(42px, 6vw, 72px);
-        font-weight: 400;
-        letter-spacing: -4px;
-        line-height: 0.96;
-      }
-
-      .first-paint h1 em {
-        color: #D4A72C;
-      }
-
-      .first-paint-lede {
-        max-width: 420px;
-        color: #4B5563;
-        font-family: Georgia, serif;
-        font-size: 18px;
-        line-height: 1.45;
-      }
-
-      .first-paint-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 28px;
-      }
-
-      .first-paint-link {
-        color: #D4A72C;
-        font-size: 11px;
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .first-paint-link:hover {
-        text-decoration: underline;
-      }
-
-      .first-paint-card {
-        position: relative;
+      .hero-page {
+        min-height: 100vh;
         overflow: hidden;
-        min-height: 310px;
-        padding: 31px;
-        color: #FAFAF7;
-        border-radius: 16px;
-        background: #172554;
-        box-shadow: 0 20px 44px rgba(23, 37, 84, 0.16);
+        background: var(--night);
       }
 
-      .first-paint-card::after {
+      .hero-page::before {
         content: "";
         position: absolute;
-        right: -54px;
-        bottom: -103px;
-        width: 260px;
-        height: 260px;
-        border: 1px solid rgba(250, 250, 247, 0.3);
-        border-radius: 50%;
-        box-shadow:
-          0 0 0 25px rgba(250, 250, 247, 0.05),
-          0 0 0 53px rgba(250, 250, 247, 0.04);
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            circle at 86% 46%,
+            rgba(228, 105, 64, 0.44),
+            transparent 29%
+          ),
+          radial-gradient(
+            circle at 66% 42%,
+            rgba(116, 33, 27, 0.18),
+            transparent 36%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(16, 17, 18, 0.96) 0%,
+            rgba(16, 17, 18, 0.92) 37%,
+            rgba(16, 17, 18, 0.48) 67%,
+            rgba(16, 17, 18, 0.08) 100%
+          );
       }
 
-      .first-paint-card small {
-        color: #E5E7EB;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-      }
-
-      .first-paint-card blockquote {
-        max-width: 360px;
-        margin: 38px 0 18px;
-        color: #FAFAF7;
-        font-family: Georgia, serif;
-        font-size: clamp(26px, 3vw, 38px);
-        line-height: 1.05;
-      }
-
-      .first-paint-card cite {
-        color: #E5E7EB;
-        font-size: 11px;
-        font-style: normal;
-      }
-
-      .first-paint-spark {
+      .hero-page::after {
+        content: "";
         position: absolute;
-        top: 28px;
-        right: 28%;
-        color: #D4A72C;
-        font-size: 25px;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.17;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
       }
 
-      .first-paint-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        max-width: 1160px;
-        margin: 32px auto 0;
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        width: min(1370px, calc(100% - 80px));
+        min-height: 100vh;
+        margin: auto;
       }
 
-      .first-paint-tile {
-        padding: 22px;
-        border: 1px solid #E5E7EB;
+      .site-header {
+        height: 84px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      .site-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: -0.7px;
+        white-space: nowrap;
+      }
+
+      .site-brand img {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
         border-radius: 10px;
-        background: #FAFAF7;
       }
 
-      .first-paint-tile span {
-        display: inline-block;
-        margin-bottom: 13px;
-        color: #D4A72C;
-        font-size: 22px;
+      .site-brand span span {
+        font-weight: 400;
       }
 
-      .first-paint-tile strong {
-        display: block;
-        margin-bottom: 8px;
-        color: #172554;
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(22px, 3.5vw, 53px);
+        margin-left: auto;
+        margin-right: 55px;
+        color: #dedbd6;
         font-size: 13px;
       }
 
-      .first-paint-tile p {
-        margin: 0;
-        color: #4B5563;
-        font-family: Georgia, serif;
-        font-size: 14px;
-        line-height: 1.4;
+      .site-nav a {
+        transition: color 0.2s ease;
       }
 
-      @media (max-width: 760px) {
-        .first-paint-header {
-          margin-bottom: 34px;
+      .site-nav a:hover {
+        color: var(--coral-light);
+      }
+
+      .language {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #e1ded9;
+        font-size: 12px;
+      }
+
+      .language span {
+        color: #8f8c88;
+      }
+
+      .hero-content {
+        min-height: calc(100vh - 84px);
+        display: grid;
+        grid-template-columns: minmax(430px, 0.95fr) minmax(400px, 1.05fr);
+        align-items: center;
+        gap: 30px;
+        padding-bottom: 52px;
+      }
+
+      .hero-copy {
+        padding: 15px 0 0 7.2%;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--coral-light);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+
+      .eyebrow-mark {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #ef5e64;
+        color: white;
+        font-size: 12px;
+      }
+
+      h1 {
+        max-width: 670px;
+        margin: 28px 0 23px;
+        color: #f7f3ee;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(51px, 6vw, 88px);
+        font-weight: 400;
+        letter-spacing: -5px;
+        line-height: 0.98;
+      }
+
+      h1 em {
+        font-weight: 400;
+      }
+
+      .hero-description {
+        max-width: 600px;
+        margin: 0;
+        color: #c7c1b9;
+        font-size: 15px;
+        line-height: 1.52;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-top: 34px;
+      }
+
+      .primary-cta,
+      .secondary-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        border-radius: 30px;
+        padding: 13px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .primary-cta {
+        color: #fff;
+        background: var(--coral);
+        box-shadow: 0 10px 28px rgba(240, 107, 111, 0.22);
+      }
+
+      .primary-cta:hover {
+        background: #f88380;
+        transform: translateY(-2px);
+      }
+
+      .secondary-cta {
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #f3efea;
+      }
+
+      .secondary-cta:hover {
+        border-color: var(--coral-light);
+        color: var(--coral-light);
+        transform: translateY(-2px);
+      }
+
+      .cta-arrow {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: var(--coral);
+        background: #fff;
+        font-size: 15px;
+      }
+
+      .hero-note {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 28px;
+        color: #8f8b84;
+        font-size: 11px;
+      }
+
+      .hero-note strong {
+        color: #c7c0b7;
+        font-weight: 500;
+      }
+
+      .hero-note-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .phone-scene {
+        position: relative;
+        height: min(680px, 76vh);
+        min-height: 510px;
+      }
+
+      .phone-glow {
+        position: absolute;
+        right: 3%;
+        top: 18%;
+        width: 70%;
+        height: 55%;
+        border-radius: 50%;
+        background: rgba(241, 103, 57, 0.34);
+        filter: blur(80px);
+      }
+
+      .phone {
+        position: absolute;
+        right: 8%;
+        top: 8%;
+        width: min(370px, 42vw);
+        aspect-ratio: 0.49;
+        padding: 9px;
+        border: 2px solid #796f70;
+        border-radius: 47px;
+        background: linear-gradient(135deg, #181a1d, #070708 54%, #79676a);
+        box-shadow:
+          -26px 34px 42px rgba(0, 0, 0, 0.55),
+          0 0 0 4px rgba(255, 255, 255, 0.08);
+        transform: rotate(13deg);
+      }
+
+      .phone::before {
+        content: "";
+        position: absolute;
+        z-index: 3;
+        top: 8px;
+        left: 50%;
+        width: 34%;
+        height: 21px;
+        border-radius: 20px;
+        background: #070707;
+        transform: translateX(-50%);
+      }
+
+      .phone-screen {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        border-radius: 38px;
+        background: linear-gradient(
+          160deg,
+          #f8c59d 0 23%,
+          #e88d7e 35%,
+          #6f5365 61%,
+          #252638 100%
+        );
+      }
+
+      .phone-sun {
+        position: absolute;
+        top: 15%;
+        right: 12%;
+        width: 106px;
+        height: 106px;
+        border-radius: 50%;
+        background: rgba(255, 229, 183, 0.72);
+        filter: blur(4px);
+      }
+
+      .phone-mountains {
+        position: absolute;
+        right: -20%;
+        bottom: 24%;
+        width: 120%;
+        height: 49%;
+        background: #4f5262;
+        clip-path: polygon(
+          0 82%,
+          22% 44%,
+          37% 64%,
+          56% 13%,
+          76% 53%,
+          100% 24%,
+          100% 100%,
+          0 100%
+        );
+      }
+
+      .phone-mountains::after {
+        content: "";
+        position: absolute;
+        inset: 22% 0 0;
+        background: rgba(30, 33, 46, 0.65);
+        clip-path: polygon(
+          0 100%,
+          36% 40%,
+          49% 68%,
+          68% 8%,
+          100% 45%,
+          100% 100%
+        );
+      }
+
+      .phone-topbar {
+        position: absolute;
+        z-index: 2;
+        top: 7%;
+        left: 10%;
+        right: 10%;
+        display: flex;
+        justify-content: space-between;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 8px;
+        font-weight: 600;
+      }
+
+      .phone-tabs {
+        position: absolute;
+        z-index: 2;
+        top: 15%;
+        left: 10%;
+        display: flex;
+        gap: 14px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 8px;
+      }
+
+      .phone-tabs b {
+        color: white;
+        border-bottom: 2px solid #ff7678;
+        padding-bottom: 4px;
+      }
+
+      .phone-card {
+        position: absolute;
+        z-index: 2;
+        left: 9%;
+        right: 9%;
+        bottom: 9%;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 13px;
+        color: white;
+        background: rgba(18, 19, 28, 0.67);
+        backdrop-filter: blur(12px);
+      }
+
+      .phone-card small {
+        color: #f4bbb2;
+        font-size: 7px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+      }
+
+      .phone-card strong {
+        display: block;
+        margin-top: 8px;
+        font-family: Georgia, serif;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .phone-card span {
+        display: block;
+        margin-top: 4px;
+        color: #d7d4d4;
+        font-size: 7px;
+      }
+
+      .floating-card {
+        position: absolute;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        color: #f2eeea;
+        background: rgba(25, 24, 26, 0.68);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(12px);
+        font-size: 10px;
+      }
+
+      .floating-card strong {
+        display: block;
+        font-size: 11px;
+      }
+
+      .floating-card small {
+        display: block;
+        margin-top: 4px;
+        color: #aaa5a1;
+        font-size: 8px;
+      }
+
+      .floating-icon {
+        width: 27px;
+        height: 27px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        color: var(--coral-light);
+        background: rgba(240, 107, 111, 0.18);
+      }
+
+      .float-top {
+        top: 24%;
+        left: 2%;
+      }
+
+      .float-bottom {
+        right: 0;
+        bottom: 16%;
+      }
+
+      .float-bottom .floating-icon {
+        color: var(--gold);
+        background: rgba(212, 167, 44, 0.15);
+      }
+
+      .hero-footer {
+        position: absolute;
+        right: 7.2%;
+        bottom: 23px;
+        left: 7.2%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #88847e;
+        font-size: 10px;
+      }
+
+      .hero-footer span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-rule {
+        width: 35px;
+        height: 1px;
+        background: #615d59;
+      }
+
+      @media (max-width: 900px) {
+        .hero-inner {
+          width: min(100% - 38px, 680px);
         }
 
-        .first-paint-nav {
+        .site-nav {
           display: none;
         }
 
-        .first-paint-hero {
-          grid-template-columns: 1fr;
+        .site-header {
+          height: 72px;
         }
 
-        .first-paint-copy {
+        .hero-content {
+          display: block;
+          padding-top: 48px;
+        }
+
+        .hero-copy {
           padding: 0;
         }
 
-        .first-paint h1 {
-          letter-spacing: -2.5px;
+        .phone-scene {
+          height: 550px;
+          margin-top: 10px;
         }
 
-        .first-paint-card {
-          min-height: 250px;
+        .phone {
+          right: 17%;
+          width: 255px;
         }
 
-        .first-paint-grid {
-          grid-template-columns: 1fr;
+        .float-top {
+          left: 4%;
+          top: 20%;
+        }
+
+        .float-bottom {
+          right: 3%;
+          bottom: 16%;
+        }
+
+        .hero-footer {
+          right: 0;
+          left: 0;
+        }
+
+        .hero-description {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .hero-inner {
+          width: calc(100% - 30px);
+        }
+
+        .site-brand {
+          font-size: 16px;
+        }
+
+        .site-brand img {
+          width: 32px;
+          height: 32px;
+        }
+
+        .language {
+          font-size: 10px;
+        }
+
+        .hero-content {
+          padding-top: 32px;
+        }
+
+        .eyebrow {
+          font-size: 10px;
+        }
+
+        .eyebrow-mark {
+          width: 24px;
+          height: 24px;
+        }
+
+        .hero-actions {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 12px;
+          width: 220px;
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          width: 100%;
+        }
+
+        .phone-scene {
+          height: 470px;
+          min-height: 0;
+        }
+
+        .phone {
+          right: 11%;
+          width: 205px;
+          border-radius: 30px;
+        }
+
+        .phone-screen {
+          border-radius: 24px;
+        }
+
+        .floating-card {
+          transform: scale(0.85);
+        }
+
+        .float-top {
+          left: -10px;
+        }
+
+        .float-bottom {
+          right: -12px;
+        }
+
+        .hero-footer {
+          position: relative;
+          bottom: auto;
+          margin-top: 12px;
+        }
+
+        .hero-footer span:last-child {
+          display: none;
+        }
+
+        h1 {
+          font-size: clamp(45px, 14vw, 66px);
+          letter-spacing: -3px;
         }
       }
     </style>
@@ -306,98 +716,121 @@
     </noscript>
 
     <div id="root">
-      <main class="first-paint">
-        <header class="first-paint-header">
-          <div class="first-paint-brand">
-            <img
-              src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
-              alt="Scripture Space" size=300px
-            />
-          </div>
+      <main class="hero-page">
+        <div class="hero-inner">
+          <header class="site-header">
+            <a class="site-brand" href="/#/home" aria-label="Scripture Space home">
+              <img
+                src="https://res.cloudinary.com/nylncw2s/image/upload/v1790778206/ChatGPT_Image_Sep_30_2026_03_22_51_PM.png"
+                alt=""
+              />
+              <span>Scripture<span>Space</span></span>
+            </a>
 
-          <nav class="first-paint-nav" aria-label="Bible app sections">
-            <a href="/#/read">Read Bible</a>
-            <a href="/#/library">Verse Library</a>
-            <a href="/#/communities">Communities</a>
-          </nav>
+            <nav class="site-nav" aria-label="Main navigation">
+              <a href="/#/home">Home</a>
+              <a href="/#/read">Read Bible</a>
+              <a href="/#/library">Verse library</a>
+              <a href="/#/communities">Communities</a>
+              <a href="/#/admin">Admin</a>
+            </nav>
 
-          <a class="first-paint-button" href="/#/home">
-            Sign in
-          </a>
-        </header>
+            <a class="language" href="/#/home" aria-label="Select language">
+              English <span>⌄</span>
+            </a>
+          </header>
 
-        <section class="first-paint-hero" aria-label="Scripture Space welcome">
-          <div class="first-paint-copy">
-            <div class="first-paint-kicker">
-              A quieter place for the Word
+          <section class="hero-content" aria-label="Scripture Space introduction">
+            <div class="hero-copy">
+              <div class="eyebrow">
+                <span class="eyebrow-mark">✦</span>
+                Bible app for your daily rhythm
+              </div>
+
+              <h1>
+                The Bible,
+                <em>made for your</em>
+                daily rhythm
+              </h1>
+
+              <p class="hero-description">
+                Create a quiet space to read scripture, save the verses that meet you,
+                write private reflections, and study alongside a thoughtful community.
+              </p>
+
+              <div class="hero-actions">
+                <a class="primary-cta" href="/#/read">
+                  Open the Bible
+                  <span class="cta-arrow">→</span>
+                </a>
+
+                <a class="secondary-cta" href="/#/communities">
+                  Find your community
+                </a>
+              </div>
+
+              <div class="hero-note">
+                <span class="hero-note-dot"></span>
+                <span>
+                  <strong>Today’s invitation:</strong>
+                  Be still, and know that I am God.
+                </span>
+              </div>
             </div>
 
-            <h1>
-              Find stillness
-              <em>in the Word.</em>
-            </h1>
+            <div class="phone-scene" aria-label="Scripture Space app preview">
+              <div class="phone-glow"></div>
 
-            <p class="first-paint-lede">
-              Read scripture slowly, keep the verses that meet you,
-              and grow alongside a thoughtful community.
-            </p>
+              <div class="floating-card float-top">
+                <div class="floating-icon">✧</div>
+                <div>
+                  <strong>Verse of the day</strong>
+                  <small>Psalm 46:10 · Saved</small>
+                </div>
+              </div>
 
-            <div class="first-paint-actions">
-              <a class="first-paint-button" href="/#/read">
-                Open today’s reading →
-              </a>
+              <div class="phone">
+                <div class="phone-screen">
+                  <div class="phone-sun"></div>
+                  <div class="phone-mountains"></div>
 
-              <a class="first-paint-link" href="/#/library">
-                Explore the Bible
-              </a>
+                  <div class="phone-topbar">
+                    <span>9:41</span>
+                    <span>● ◒ ▴</span>
+                  </div>
+
+                  <div class="phone-tabs">
+                    <b>Today</b>
+                    <span>Community</span>
+                  </div>
+
+                  <div class="phone-card">
+                    <small>Morning reflection</small>
+                    <strong>Be still, and know that I am God.</strong>
+                    <span>Psalm 46:10 · New International Version</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="floating-card float-bottom">
+                <div class="floating-icon">✓</div>
+                <div>
+                  <strong>4 day rhythm</strong>
+                  <small>Keep making room for the Word</small>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
 
-          <article class="first-paint-card">
-            <span class="first-paint-spark">✦</span>
+          <footer class="hero-footer">
+            <span>
+              <i class="footer-rule"></i>
+              Scripture, reflection, community
+            </span>
 
-            <small>
-              Verse of the day · Psalm 46:10
-            </small>
-
-            <blockquote>
-              “Be still, and know that I am God.”
-            </blockquote>
-
-            <cite>
-              Stillness is a way of remembering who holds everything together.
-            </cite>
-          </article>
-        </section>
-
-        <section class="first-paint-grid" aria-label="Scripture Space features">
-          <article class="first-paint-tile">
-            <span>✧</span>
-            <strong>Enlightenment verses</strong>
-            <p>
-              Return to a verse chosen to bring perspective
-              and peace to your day.
-            </p>
-          </article>
-
-          <article class="first-paint-tile">
-            <span>⌁</span>
-            <strong>Private reflections</strong>
-            <p>
-              Write honestly, save meaningful passages,
-              and keep your faith journey close.
-            </p>
-          </article>
-
-          <article class="first-paint-tile">
-            <span>◌</span>
-            <strong>Study in community</strong>
-            <p>
-              Find Bible scholars and curious readers
-              who make room for good questions.
-            </p>
-          </article>
-        </section>
+            <span>Scroll to begin ↓</span>
+          </footer>
+        </div>
       </main>
     </div>
 
