@@ -74,6 +74,10 @@
   );
   --botanical-op: 0.13;
   --sunk: #151926;
+
+  /* The monogram keeps its own brand ink so it never inherits body text colour */
+  --brand-ink: #f4f2ec;
+  --brand-ink-soft: rgba(244, 242, 236, 0.72);
 }
 
 /* Light — airy, natural, generous whitespace */
@@ -121,6 +125,9 @@
   );
   --botanical-op: 0.2;
   --sunk: #f1efe8;
+
+  --brand-ink: #172554;
+  --brand-ink-soft: rgba(23, 37, 84, 0.72);
 }
 
 /* --------------------------------------------------------------------------
@@ -263,13 +270,10 @@ p {
   position: relative;
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--card);
-  border: 1px solid var(--line-strong);
-  box-shadow: var(--shadow-sm);
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--brand-ink);
   transition: transform var(--dur) var(--ease);
 }
 
@@ -277,10 +281,11 @@ p {
   transform: translateY(-1px);
 }
 
-.brand-mark img {
+/* The mark carries its own gold accent, so it never needs a tile behind it. */
+.brand-mark svg {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .brand-name {
@@ -492,11 +497,12 @@ p {
   place-items: center;
   width: 40px;
   height: 40px;
+  padding: 8px;
   flex-shrink: 0;
   border-radius: var(--r-pill);
-  overflow: hidden;
+  background: var(--card);
+  color: var(--brand-ink);
   border: 1px solid var(--line-strong);
-  box-shadow: var(--shadow-sm);
   transition: transform var(--dur) var(--ease),
     border-color var(--dur) var(--ease);
 }
@@ -506,10 +512,10 @@ p {
   border-color: var(--gold);
 }
 
-.avatar img {
+.avatar svg {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 /* --------------------------------------------------------------------------
