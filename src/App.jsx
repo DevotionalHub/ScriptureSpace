@@ -296,7 +296,7 @@ function App() {
     <div className="app-shell">
       <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="brand-lockup" onClick={() => navigate('home')} role="button" tabIndex="0">
-          <div className="brand-mark"><SSMark /></div>
+          <div className="brand-mark"><CrossMark /></div>
           <div>
             <div className="brand-name">Scripture<span>Space</span></div>
             <div className="brand-tagline">A quieter place for the Word</div>
@@ -348,7 +348,7 @@ function App() {
       <main className="main-content">
         <header className="topbar">
           <button className="mobile-menu" onClick={() => setSidebarOpen(true)} aria-label="Open navigation"><Menu size={21} /></button>
-          <div className="mobile-brand"><div className="brand-mark small"><SSMark /></div><span>Scripture<span>Space</span></span></div>
+          <div className="mobile-brand"><div className="brand-mark small"><CrossMark /></div><span>Scripture<span>Space</span></span></div>
           <div className="topbar-context">
             <span className="context-dot" />
             <span>Wednesday, September 30, 2026</span>
@@ -512,7 +512,7 @@ function AuthModal({ onClose, showToast }) {
     setSent(true)
     showToast('Check your inbox for a secure sign-in link.')
   }
-  return <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><div className="modal auth-modal"><button className="modal-close" onClick={onClose} aria-label="Close"><X size={18} /></button><div className="modal-logo"><div className="brand-mark"><SSMark /></div></div>{sent ? <><p className="eyebrow centered"><Check size={14} /> Link sent</p><h2>Check your inbox.</h2><p className="modal-copy">We sent a secure sign-in link to <strong>{email}</strong>. This window can stay open while you check.</p><button className="outline-button full" onClick={() => setSent(false)}>Use a different email</button></> : <><p className="eyebrow centered">Welcome back</p><h2>Keep your place.</h2><p className="modal-copy">Sign in to save verses, keep reflections private, and find your communities anywhere.</p><form onSubmit={submit}><label className="field-label">Email address<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoFocus /></label>{error && <div className="form-error">{error}</div>}<button className="primary-button full" disabled={sending}>{sending ? 'Sending link…' : 'Continue with email'} <ArrowRight size={16} /></button></form><p className="auth-footnote"><LockKeyhole size={13} /> Passwordless and secure through Supabase</p></>}</div></div>
+  return <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><div className="modal auth-modal"><button className="modal-close" onClick={onClose} aria-label="Close"><X size={18} /></button><div className="modal-logo"><div className="brand-mark"><CrossMark /></div></div>{sent ? <><p className="eyebrow centered"><Check size={14} /> Link sent</p><h2>Check your inbox.</h2><p className="modal-copy">We sent a secure sign-in link to <strong>{email}</strong>. This window can stay open while you check.</p><button className="outline-button full" onClick={() => setSent(false)}>Use a different email</button></> : <><p className="eyebrow centered">Welcome back</p><h2>Keep your place.</h2><p className="modal-copy">Sign in to save verses, keep reflections private, and find your communities anywhere.</p><form onSubmit={submit}><label className="field-label">Email address<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" autoFocus /></label>{error && <div className="form-error">{error}</div>}<button className="primary-button full" disabled={sending}>{sending ? 'Sending link…' : 'Continue with email'} <ArrowRight size={16} /></button></form><p className="auth-footnote"><LockKeyhole size={13} /> Passwordless and secure through Supabase</p></>}</div></div>
 }
 
 function CreateCommunityModal({ onClose, onCreate }) {
@@ -524,7 +524,7 @@ function CreateCommunityModal({ onClose, onCreate }) {
 function SectionHeader({ eyebrow, title, action, onAction }) { return <div className="section-header"><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div>{action && <button className="section-action" onClick={onAction}>{action} <ArrowRight size={14} /></button>}</div> }
 
 function Avatar({ name, tone = 'sage' }) { return <div className={`avatar ${tone}`} aria-label={name}>{name.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</div> }
-function SSMark() { return <svg viewBox="58 62 322 344" fill="none" aria-hidden="true"><path d="M 260 180 C 260 142 226 120 184 120 C 144 120 118 142 118 174 C 118 206 144 220 186 232 C 230 244 256 258 256 292 C 256 326 226 348 186 348 C 144 348 114 328 114 290" stroke="currentColor" strokeWidth="58" strokeLinecap="round" strokeLinejoin="round" /><path d="M 324 180 C 324 142 290 120 248 120 C 208 120 182 142 182 174 C 182 206 208 220 250 232 C 294 244 320 258 320 292 C 320 326 290 348 250 348 C 208 348 178 328 178 290" stroke="currentColor" strokeWidth="58" strokeLinecap="round" strokeLinejoin="round" /><path d="M 256 213.96 C 242.88 200.84 223.2 194.28 205.16 195.92 L 205.16 250.04 C 223.2 248.4 242.88 254.96 256 268.08 C 269.12 254.96 288.8 248.4 306.84 250.04 L 306.84 195.92 C 288.8 194.28 269.12 200.84 256 213.96" stroke="#D4A72C" strokeWidth="23" strokeLinecap="round" strokeLinejoin="round" /><path d="M 256 213.96 L 256 268.08" stroke="#D4A72C" strokeWidth="14.26" strokeLinecap="round" /></svg> }
+function CrossMark() { return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M13.9 3.4v9.4H4.6v2.5h9.3v9.3h2.6v-9.3h6.9c.5-1 .8-1.7 1-2.5h-7.9V3.4h-2.6Z" fill="currentColor" /></svg> }
 function greeting() { const hour = new Date().getHours(); return hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening' }
 function formatRelativeTime(value) {
   if (!value) return 'Just now'
